@@ -5,13 +5,9 @@ block mid-content
 		header
 			h1 #{__('Login')}
 		form.login.form-horizontal(action="/users/session", method="post")
-			
 
-			label(for='email') #{__('Email')}
-			input#email(type='text', name="email", placeholder="#{__('Email')}")
-
-			label(for='password') #{__('Password')}
-			input#password(type='password', name="password", placeholder="#{__('Email')}")
+			input#email(type='text', name="email", placeholder="#{__('User')}")
+			input#password(type='password', name="password", placeholder="#{__('Password')}")
 
 			if (typeof errors !== 'undefined')
 				.fade.in.alert.alert-block.alert-error
@@ -19,11 +15,12 @@ block mid-content
 						ul
 							each error in errors
 								li= error.type
-			p.error= message
+			if ( message != "")
+				p.message
+					i.icon.warning-sign
+					| #{message}
 
 			button.green(type='submit') #{__('Enter')}
-			button.red(type='submit') #{__('Enter')}
-			button.purple(type='submit') #{__('Enter')}
 	section#signup
 		header
 			h1 #{__('Signup')}

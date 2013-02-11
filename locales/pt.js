@@ -44,5 +44,6 @@
 	"Signup": "Signup",
 	"facebook": "facebook",
 	"twitter": "twitter",
-	"google-plus": "google+"
+	"google-plus": "google+",
+	"User": "User"
 }
