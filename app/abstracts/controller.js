@@ -26,7 +26,7 @@ var BaseController = function(name,app,passport,auth){
 	, __virtuals = []
 	, __routes = {
 		index : {
-			mapping : __map 
+			mapping : __map
 			, method : "get"
 			, filters : []
 			, render : function(req,res,controller){}
@@ -34,13 +34,13 @@ var BaseController = function(name,app,passport,auth){
 		, add : {
 			mapping : __map + "/add"
 			, method : "get"
-			, filters : [ auth.requiresLogin ]
+			, filters : [] //[ auth.requiresLogin ]
 			, render : function(req,res,controller){}
 		}
 		, create : {
 			mapping : __map + "/add"
 			, method : "post"
-			, filters : [ auth.requiresLogin ]
+			, filters : [] //[ auth.requiresLogin ]
 			, render : function(req,res,controller){}
 		}
 		, view : {
@@ -52,19 +52,19 @@ var BaseController = function(name,app,passport,auth){
 		, edit : {
 			mapping : __map + "/:" + __name + "Id" +"/edit"
 			, method : "get"
-			, filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, filters : [] //[ auth.requiresLogin , auth.hasAuthorization ]
 			, render : function(req,res,controller){}
 		}
 		, update : {
 			mapping : __map + "/:" + __name + "Id"
 			, method : "put"
-			, filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, filters : [] //[ auth.requiresLogin , auth.hasAuthorization ]
 			, render : function(req,res,controller){}
 		}
 		, destroy : {
 			mapping : __map + "/:" + __name + "Id"
 			, method : "del"
-			, filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, filters : [] //[ auth.requiresLogin , auth.hasAuthorization ]
 			, render : function(req,res,controller){}
 		}
 	}
@@ -114,7 +114,7 @@ var BaseController = function(name,app,passport,auth){
 
 				var obj = __routes[obj]
 				, args = [];
-				
+
 				if(!obj.mapping) continue;
 
 				args.push(obj.mapping);
@@ -125,7 +125,7 @@ var BaseController = function(name,app,passport,auth){
 				}
 
 				args.push(obj.render);
-				
+
 				app[ (obj.method ? obj.method : 'get') ].apply(app,args);
 
 			};
@@ -147,7 +147,7 @@ var BaseController = function(name,app,passport,auth){
 				if(!__routes.hasOwnProperty(obj.action)) continue;
 
 				args.push(__routes[obj.action].render);
-				
+
 				app[ (obj.method ? obj.method : 'get') ].apply(app,args);
 
 			};
@@ -155,7 +155,7 @@ var BaseController = function(name,app,passport,auth){
 			for (var filter in __filters)
 				app.param(filter, __filters[filter])
 
-		}		
+		}
 	}
 }
 

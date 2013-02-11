@@ -8,8 +8,8 @@ module.exports = {
 		},
 		db: 'mongodb://localhost/noder',
 		facebook: {
-			clientID: "APP_ID"
-			, clientSecret: "APP_SECRET"
+			clientID: "486133094757475"
+			, clientSecret: "fa587fbedb18b7ec1866f96a7f41f967"
 			, callbackURL: "http://localhost:3000/auth/facebook/callback"
 		},
 		twitter: {

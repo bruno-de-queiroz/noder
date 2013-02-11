@@ -6,7 +6,8 @@ var ArticleController = function(app,passport,auth){
 
 	Articles.import([ 'imager' ]).extend({
 		add : {
-			render : function(req, res){
+			filters : [ auth.requiresLogin ]
+			, render : function(req, res){
 				var Article = Articles.model('Article');
 
 				res.render( Articles.name() + '/add', {
@@ -17,7 +18,8 @@ var ArticleController = function(app,passport,auth){
 			}
 		}
 		, create : {
-			render : function (req, res) {
+			filters : [ auth.requiresLogin ]
+			, render : function (req, res) {
 				var Article = Articles.model('Article')
 				, Imager = Articles.lib('imager')
 				, imagerConfig = Articles.config('imager')
@@ -49,7 +51,8 @@ var ArticleController = function(app,passport,auth){
 			}
 		}
 		, edit : {
-			render : function (req, res) {
+			filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, render : function (req, res) {
 				res.render( Articles.name() + '/edit', {
 					title: app.locals.__('Edit %s',req.article.title)
 					, pageName: Articles.name() + "-edit"
@@ -58,7 +61,8 @@ var ArticleController = function(app,passport,auth){
 			}
 		}
 		, update : {
-			render : function(req, res){
+			filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, render : function(req, res){
 				var article = req.article;
 
 				article = _.extend(article, req.body)
@@ -89,7 +93,8 @@ var ArticleController = function(app,passport,auth){
 			}
 		}
 		, destroy : {
-			render : function(req, res){
+			filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, render : function(req, res){
 				var article = req.article
 				article.remove(function(err){
 					// req.flash('notice', 'Deleted successfully')

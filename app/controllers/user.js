@@ -44,26 +44,35 @@ var UserController = function(app,passport,auth){
 			}
 		}
 		, session : {
-			method : "post"
-			, mapping : '/users/session'
+			mapping : '/users/session'
+			, method : "post"
 			, filters : [ passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid email or password.'}) ]
 			, render : function (req, res) {
 				res.redirect('/')
 			}
 		}
 		, create : {
-			render : function (req, res) {
+			mapping : "/users/add"
+			, method : "post"
+			, filters : [ ]
+			, render : function (req, res) {
+				console.log("Criando usuário");
 				var User = Users.model('User')
 				, user = new User(req.body)
-
-				user.provider = 'local'
+				user.provider = 'local';
+				console.log("Registrando o user")
 				user.save(function (err) {
 					if (err) {
+						console.log(err);
 						return res.render( Users.name() + '/signup', { errors: err.errors, user: user })
 					}
+					console.log("Logando o user")
 					req.logIn(user, function(err) {
-						if (err) return next(err)
-							return res.redirect('/')
+						if (err){
+							console.log(err);
+							return next(err);
+						}
+						return res.redirect('/')
 					})
 				})
 			}
@@ -74,7 +83,7 @@ var UserController = function(app,passport,auth){
 				res.render( Users.name() + '/show', {
 					title: user.name
 					, user: user
-					, pageName: "login"
+					, pageName: "user-setup"
 				})
 			}
 		}
@@ -100,12 +109,12 @@ var UserController = function(app,passport,auth){
 			, action : 'authCallback'
 		}
 		, {
-			mapping : '/auth/google'
+			mapping : '/auth/google-plus'
 			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'signin'
-		}		
+		}
 		, {
-			mapping : '/auth/google/callback'
+			mapping : '/auth/google-plus/callback'
 			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'authCallback'
 		}

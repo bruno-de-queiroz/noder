@@ -27,7 +27,7 @@ module.exports = function (app, config, passport) {
 		},
 		level: 9
 	}))
-		
+
 	app.use(i18n.init);
 
 	// use stylus middleware
@@ -104,4 +104,5 @@ module.exports = function (app, config, passport) {
 		})
 
 	})
+
 }

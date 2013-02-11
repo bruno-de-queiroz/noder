@@ -1,5 +1,10 @@
 extends ../layouts/default
 
-block main
-  h1= user.name
-
+block mid-content
+  form(action="/users/"+user.id, method="post")
+    input#name(type='text', name="name", placeholder="#{__('Full name')}", value=user.name)
+    input#email(type='text', name="email", placeholder="#{__('Email')}", value=user.email)
+    input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)
+    input#password(type='password', name="password", placeholder="#{__('Password')}")
+    button.button.green(type='submit') #{__('Sign up')}
+    a.button.purple(href="/login") #{__('login')}
