@@ -1,0 +1,23 @@
+extends ../layouts/default
+
+block content
+	- var action = '/coisas/add'
+		if (!coisa.isNew)
+			- action = '/coisas/'+coisa.id
+
+	form(method="post", action=action, enctype="multipart/form-data")
+		if (!coisa.isNew)
+			input(type="hidden", name="_method", value="PUT")
+
+		fieldset#title
+			label(for='title-input') #{__('Title')}
+			input#title-input(type='text', name="title", value=coisa.title, placeholder="#{__('Enter the title')}")
+
+		fieldset#body
+			label(for='body-input') #{__('Body')}
+			textarea#body-input(type='text', rows="5", name="body", placeholder="#{__('Enter the coisa description')}")=coisa.body
+
+		fieldset#actions
+			button(type='submit') #{__('Save changes')}
+			&nbsp;
+			a.button-like(href='/articles', title="cancel") #{__('Cancel')}

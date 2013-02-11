@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+block main
+	h1= __('Coisas')
+	hr
+
+block content
+	each coisa in coisas
+		article
+			h1
+				a.title(href='/coisas/'+coisa._id, title=coisa.title) #{coisa.title}
+			p=coisa.body
+			
+	if (pages > 1)
+		nav.pagination
+			ul
+				!= createPagination(pages, page)

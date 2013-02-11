@@ -1,0 +1,21 @@
+extends ../layouts/default
+
+
+block left-content
+  h1= __('Articles')
+  each article in articles
+    .article
+      a.title(href='/articles/'+article._id, title=article.title) #{article.title}
+      p=article.body
+      .author
+        span= __d(article.createdAt)
+        span &nbsp;| #{__('Author')} :&nbsp;
+        a(href="/users/"+article.user._id)=article.user.name
+        | &nbsp;|&nbsp;
+        if (article.tags)
+          span.tags
+            span #{__('Tags')} :&nbsp;
+            each tag in article.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon.tags
+                |  #{tag}

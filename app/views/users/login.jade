@@ -1,0 +1,32 @@
+extends ../layouts/default
+
+block mid-content
+	section#login
+		header
+			h1 #{__('Login')}
+		form.login.form-horizontal(action="/users/session", method="post")
+			
+
+			label(for='email') #{__('Email')}
+			input#email(type='text', name="email", placeholder="#{__('Email')}")
+
+			label(for='password') #{__('Password')}
+			input#password(type='password', name="password", placeholder="#{__('Email')}")
+
+			if (typeof errors !== 'undefined')
+				.fade.in.alert.alert-block.alert-error
+					a.close(data-dismiss="alert", href="javascript:void(0)") x
+						ul
+							each error in errors
+								li= error.type
+			p.error= message
+
+			button.green(type='submit') #{__('Enter')}
+			button.red(type='submit') #{__('Enter')}
+			button.purple(type='submit') #{__('Enter')}
+	section#signup
+		header
+			h1 #{__('Signup')}
+		p use one of the providers below to sign up as a noder account.
+		each provider in providers
+			span.button(class=provider) use #{__(provider)}

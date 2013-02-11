@@ -1,0 +1,24 @@
+!!! 5
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml')
+	include ../includes/head
+	body(class=pageName)
+		if (typeof errors !== 'undefined')
+				aside#messages		
+					a.close(data-dismiss="alert", href="javascript:void(0)") x
+					ul
+						each error in errors
+							li= error.type
+
+
+		section#left-content
+			include ../includes/left.jade
+			block left-content
+
+		section#mid-content
+			block mid-content
+			
+		section#right-content
+			include ../includes/right.jade
+			block right-content
+
+		include ../includes/foot

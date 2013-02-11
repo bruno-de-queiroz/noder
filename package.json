@@ -1,0 +1,31 @@
+{
+	"name": "noder",
+	"description": "A social blog",
+	"version": "0.0.1",
+	"private": "true",
+	"author": "Bruno de Queiroz <creativelikeadog@gmail.com>",
+	"dependencies": {
+		"socket.io":"latest",
+		"express":"latest",
+		"prototype":"latest",	
+		"connect-mongo": "latest",
+		"connect-flash": "latest",
+		"mongoose": "latest",
+		"passport": "latest",
+		"passport-local": "latest",
+		"passport-facebook": "latest",
+		"passport-twitter": "latest",
+		"passport-github": "latest",
+		"passport-google-oauth": "latest",
+		"lodash":"latest",
+		"i18n": "latest",
+		"moment":"latest",
+		"jade": "latest",
+		"stylus": "latest",
+		"nib": "latest",
+		"imager": "latest",
+		"gzippo": "latest",
+		"async": "latest",
+		"nodemon": "latest"
+	}
+}
