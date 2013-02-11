@@ -26,4 +26,4 @@ block mid-content
 			h1 #{__('Signup')}
 		p use one of the providers below to sign up as a noder account.
 		each provider in providers
-			a.button(class=provider,href="/auth/"+provider) use #{__(provider)}
+			a.button(class=provider,href="/auth/"+provider) #{__("use "+provider)}

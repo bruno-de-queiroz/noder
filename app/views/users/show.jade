@@ -5,20 +5,25 @@ block mid-content
 		fieldset#account-info
 			h1 #{__('Account info')}
 			figure#userpicture
+				if( user.picture.files.thumb )
+					img(src=user.picture.files.thumb)
+				else
+					i.icon.plus-sign.add-image
 			input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)
-			input#blogtitle(type='text',name="blogtitle", placeholder="#{__('Blog title')}", value=user.blogtitle)
-			textarea#blogdescription(name="blogdescripton",placeholder="#{__('Blog description')}")= user.blogdescription
+			input#blogtitle(type='text',name="blog.title", placeholder="#{__('Blog title')}", value=user.blog.title)
+			textarea#blogdescription(name="blog.descripton",placeholder="#{__('Blog description')}")= user.blog.description
 		fieldset#bind-to
 			h1 #{__("Bind to")}
 			each provider in providers
 				if(user.hasOwnProperty(provider))
 					span.disabled(class=provider)
-						user.name
+						i.icon(class=provider+"-sign")
+						| user.name
 				else
 					a(href="/auth/"+provider,class=provider)
 						i.icon(class=provider+"-sign")
 						| #{__("add a "+provider+" account")}
-			input#autopublish(type="checkbox",name="autopublishtoall",value="true")
+			input#autopublish(type="checkbox",name="autopublishtoall",value="true",checked="true")
 			label(for="autopublish") #{__('Auto publish articles in all accounts')}
 		fieldset#action
 			button.button.green(type='submit') #{__('Save')}

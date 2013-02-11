@@ -20,7 +20,7 @@ var UserController = function(app,passport,auth){
 					title: app.locals.__('Login')
 					, message: req.flash('error')
 					, pageName: "login"
-					, providers : [ 'facebook', 'twitter' , 'google-plus' ]
+					, providers : [ 'facebook', 'twitter' , 'google' ]
 				})
 			}
 		}
@@ -32,7 +32,7 @@ var UserController = function(app,passport,auth){
 				res.render( Users.name() + '/signup', {
 					title: app.locals.__('Sign up')
 					, user: new User()
-					, pageName: "Sign up"
+					, pageName: "sign-up"
 				})
 			}
 		}
@@ -56,25 +56,39 @@ var UserController = function(app,passport,auth){
 			, method : "post"
 			, filters : [ ]
 			, render : function (req, res) {
-				console.log("Criando usuário");
 				var User = Users.model('User')
 				, user = new User(req.body)
+				, Imager = Users.lib('imager')
+				, imagerConfig = Users.config('imager')
+				, imager = new Imager(imagerConfig, 'S3');
+
 				user.provider = 'local';
-				console.log("Registrando o user")
-				user.save(function (err) {
-					if (err) {
-						console.log(err);
-						return res.render( Users.name() + '/signup', { errors: err.errors, user: user })
-					}
-					console.log("Logando o user")
-					req.logIn(user, function(err) {
-						if (err){
-							console.log(err);
-							return next(err);
+
+				imager.upload(req.files.image, function (err, cdnUri, files) {
+					if (err)
+						return res.render('400')
+
+					if (files.length)
+						user.picture = { cdnUri : cdnUri, files : files }
+
+					user.save(function(err){
+						if (err) {
+							res.render('/signup', {
+								title: app.locals.__('Sign up')
+								, user: user
+								, pageName: "sign-up"
+								, errors: err.errors
+							})
 						}
-						return res.redirect('/')
+						req.logIn(user, function(err) {
+							if (err){
+								console.log(err);
+								return next(err);
+							}
+							return res.redirect('/')
+						})
 					})
-				})
+				}, 'user');
 			}
 		}
 		, view  : {
@@ -84,7 +98,7 @@ var UserController = function(app,passport,auth){
 					title: user.name
 					, user: user
 					, pageName: "user-setup"
-					, providers : [ 'facebook', 'twitter' , 'google-plus' ]
+					, providers : [ 'facebook', 'twitter' , 'google' ]
 				})
 			}
 		}
@@ -110,12 +124,12 @@ var UserController = function(app,passport,auth){
 			, action : 'authCallback'
 		}
 		, {
-			mapping : '/auth/google-plus'
+			mapping : '/auth/google'
 			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'signin'
 		}
 		, {
-			mapping : '/auth/google-plus/callback'
+			mapping : '/auth/google/callback'
 			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'authCallback'
 		}

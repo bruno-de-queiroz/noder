@@ -2,6 +2,7 @@ extends ../layouts/default
 
 block mid-content
   form(action="/users/add", method="post")
+    input(type='file', name="picture")
     input#name(type='text', name="name", placeholder="#{__('Full name')}", value=user.name)
     input#email(type='text', name="email", placeholder="#{__('Email')}", value=user.email)
     input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)

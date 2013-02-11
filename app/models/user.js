@@ -16,6 +16,14 @@ var UserSchema = new Schema({
   , facebook: {}
   , twitter: {}
   , google: {}
+  , picture : {
+      cdnUri: String
+      , files: []
+  }
+  , blog : {
+      title: String
+      , description : String
+  }
 })
 
 // virtual attributes

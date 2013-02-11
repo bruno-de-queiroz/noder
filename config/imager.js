@@ -1,5 +1,13 @@
 module.exports = {
   variants: {
+    user: {
+      resize: {
+        detail: "x200"
+      },
+      crop: {
+        thumb: "90x90"
+      }
+    },
     article: {
       resize: {
         detail: "x440"

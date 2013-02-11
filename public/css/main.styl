@@ -12,7 +12,7 @@ green-color = #4adb76
 red-color = #e7635e
 facebook-color = #3a5a93
 twitter-color = #18aacf
-google-plus-color = #1f1f1f
+google-color = #1f1f1f
 marvel = 'Marvel', sans-serif
 opensans = 'Open Sans', sans-serif
 ostrich = 'ostrich_sans_roundedmedium', sans-serif
@@ -108,53 +108,103 @@ section#signup
 		width auto
 		text-decoration none
 
-fieldset#account-info
-	float left
-	width 265px
-	height 220px
-	padding 25px
-	position relative
-	text-align center
-	h1
-		text-align left
-	input:first-child
-		margin-bottom 20px
-	input
-		width 90%
-	button
-		position absolute
-		bottom 25px
-		left 50%
-		margin-left -90px
-	p.message
-		margin-top 10px
-
-fieldset#bind-to
-	width 250px
-	padding 25px
+.user-setup-page section#mid-content
 	background lighten(background-color,2)
-	overflow hidden
-	label
-		font-family marvel
-		font-size 15px
-		color lighten(main-grey-color,10)
-		margin 0 0 20px 0
-		line-height 20px
-	a
-		display block
-		width auto
-		text-decoration none
-		font-size 18px
-		margin-bottom 20px
-		font-family opensans
-		letter-spacing -2px
-		i.icon
-			margin 0 5px 0 0
-			font-size 20px
+	position fixed
+	width 730px
+	height 400px
+	left 50%
+	top 50%
+	margin-left -(@width/2)
+	margin-top -(@height/2)
+
+	fieldset#account-info
+		float left
+		width 380px
+		padding 25px 25px 70px 25px
+		position relative
+		overflow hidden
+		background white
+		h1
+			text-align left
+		figure
+			display block
+			width 90px
+			height 90px
+			padding 0
+			margin 0
+			float left
+			margin 0 17px 0 0
+			border 1px solid #DDD
+			background background-color
+			text-align center
+			line-height 110px
+			transition all .2s
+			.add-image
+				cursor pointer
+				font-size 38px
+				color main-color
+				&:hover
+					color lighten(main-color,10)
+					transition all .2s
+		input
+			margin-bottom 18px
+			width 250px
+		textarea
+			width 360px
+			height 120px
+			resize none
+		button
+			position absolute
+			bottom 25px
+			left 50%
+			margin-left -90px
+		p.message
+			margin-top 10px
+
+	fieldset#bind-to
+		width 250px
+		padding 25px
+		overflow hidden
+		input[type=checkbox]
 			vertical-align middle
-		&.facebook
-			color facebook-color
-		&.twitter
-			color twitter-color
-		&.google-plus
-			color google-plus-color
+			cursor pointer
+		label
+			font-family marvel
+			font-size 15px
+			color lighten(main-grey-color,10)
+			margin 0 0 20px 0
+			line-height 20px
+			vertical-align middle
+		a
+			display block
+			width auto
+			text-decoration none
+			font-size 21px
+			margin-bottom 20px
+			font-family opensans
+			font-weight 300
+			letter-spacing -2px
+			transition all .2s
+			i.icon
+				margin 0 10px 0 0
+				font-size 26px
+				vertical-align middle
+			&.facebook
+				color facebook-color
+			&.twitter
+				color twitter-color
+			&.google
+				color google-color
+			&:hover
+				opacity 0.7
+				transition all .2s
+
+	fieldset#action
+		position absolute
+		bottom 0
+		background darken(background-color,1)
+		padding 10px
+		left 0
+		right 0
+		text-align center
