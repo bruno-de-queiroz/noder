@@ -45,5 +45,14 @@
 	"facebook": "facebook",
 	"twitter": "twitter",
 	"google-plus": "google+",
-	"User": "User"
+	"User": "User",
+	"Account info": "Account info",
+	"Blog title": "Blog title",
+	"Save": "Save",
+	"Blog description": "Blog description",
+	"Bind to": "Bind to",
+	"add a facebook account": "add a facebook account",
+	"add a twitter account": "add a twitter account",
+	"add a google-plus account": "add a google-plus account",
+	"Auto publish articles in all accounts": "Auto publish articles in all accounts"
 }

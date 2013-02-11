@@ -1,10 +1,24 @@
 extends ../layouts/default
 
 block mid-content
-  form(action="/users/"+user.id, method="post")
-    input#name(type='text', name="name", placeholder="#{__('Full name')}", value=user.name)
-    input#email(type='text', name="email", placeholder="#{__('Email')}", value=user.email)
-    input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)
-    input#password(type='password', name="password", placeholder="#{__('Password')}")
-    button.button.green(type='submit') #{__('Sign up')}
-    a.button.purple(href="/login") #{__('login')}
+	form(action="/users/"+user.id, method="post")
+		fieldset#account-info
+			h1 #{__('Account info')}
+			figure#userpicture
+			input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)
+			input#blogtitle(type='text',name="blogtitle", placeholder="#{__('Blog title')}", value=user.blogtitle)
+			textarea#blogdescription(name="blogdescripton",placeholder="#{__('Blog description')}")= user.blogdescription
+		fieldset#bind-to
+			h1 #{__("Bind to")}
+			each provider in providers
+				if(user.hasOwnProperty(provider))
+					span.disabled(class=provider)
+						user.name
+				else
+					a(href="/auth/"+provider,class=provider)
+						i.icon(class=provider+"-sign")
+						| #{__("add a "+provider+" account")}
+			input#autopublish(type="checkbox",name="autopublishtoall",value="true")
+			label(for="autopublish") #{__('Auto publish articles in all accounts')}
+		fieldset#action
+			button.button.green(type='submit') #{__('Save')}

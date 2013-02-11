@@ -84,6 +84,7 @@ var UserController = function(app,passport,auth){
 					title: user.name
 					, user: user
 					, pageName: "user-setup"
+					, providers : [ 'facebook', 'twitter' , 'google-plus' ]
 				})
 			}
 		}
