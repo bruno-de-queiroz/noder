@@ -21,10 +21,11 @@ var ArticleController = function(app,passport,auth){
 			filters : [ auth.requiresLogin ]
 			, render : function (req, res) {
 				var Article = Articles.model('Article')
+				, User = Articles.model('User')
 				, Imager = Articles.lib('imager')
 				, imagerConfig = Articles.config('imager')
 				, article = new Article(req.body)
-				, imager = new Imager(imagerConfig, 'S3')
+				, imager = new Imager(imagerConfig, 'S3');
 
 
 				article.user = req.user
@@ -44,7 +45,22 @@ var ArticleController = function(app,passport,auth){
 								})
 							}
 							else {
-								res.redirect(Articles.name() + '/' + article._id)
+								User.findOne({ _id : req.user._id },function(err,user) {
+									user.articles.push(article._id);
+
+									user.save(function (err) {
+										if (err) throw new Error(app.locals.__('Error while saving user'))
+										res.redirect(Articles.name() + '/' + article._id)
+									})
+
+									if(err)
+										res.render(Articles.name() + '/add', {
+											title: app.locals.__('New Article')
+											, article: article
+											, pageName: Articles.name() + "-add"
+											, errors: err.errors
+										});
+								});
 							}
 						})
 					}, 'article')
@@ -103,14 +119,17 @@ var ArticleController = function(app,passport,auth){
 			}
 		}
 		, index : {
-			render : function(req, res){
+			mapping : "/articles"
+			, method : "get"
+			, filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, render : function(req, res){
 				var Article = Articles.model('Article')
 
 				, perPage = 5
 				, page = req.param('page') > 0 ? req.param('page') : 0
 
 				Article
-					.find({})
+					.find({ user : req.user._id })
 					.populate('user', 'name')
 					.sort({'createdAt': -1}) // sort by date
 					.limit(perPage)

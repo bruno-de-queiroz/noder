@@ -48,7 +48,7 @@ var UserController = function(app,passport,auth){
 			, method : "post"
 			, filters : [ passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid email or password.'}) ]
 			, render : function (req, res) {
-				res.redirect('/')
+				res.redirect('/articles');
 			}
 		}
 		, create : {
@@ -63,8 +63,8 @@ var UserController = function(app,passport,auth){
 				, imager = new Imager(imagerConfig, 'S3');
 
 				user.provider = 'local';
-
-				imager.upload(req.files.image, function (err, cdnUri, files) {
+				console.log(req.files);
+				imager.upload(req.files.picture, function (err, cdnUri, files) {
 					if (err)
 						return res.render('400')
 
@@ -85,7 +85,7 @@ var UserController = function(app,passport,auth){
 								console.log(err);
 								return next(err);
 							}
-							return res.redirect('/')
+							return res.redirect('/articles');
 						})
 					})
 				}, 'user');
@@ -135,13 +135,24 @@ var UserController = function(app,passport,auth){
 		}
 	]).apply({
 		usersId : function (req, res, next, id) {
+			console.log("Midwares de user");
 			var User = Users.model('User')
+			, Articles = Users.model('Article');
 
 			User.findOne({ _id : id })
 				.exec(function (err, user) {
+
+					Articles.find({ user: id }, function (err, articles) {
+						if (err)
+							return next(err)
+						user.articles = articles;
+					})
+
 					if (err) return next(err)
 					if (!user) return next(new Error(app.locals.__('Failed to load User %s',id)))
-						req.profile = user
+
+					req.profile = user;
+
 					next()
 				})
 		}

@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 	, TwitterStrategy = require('passport-twitter').Strategy
 	, FacebookStrategy = require('passport-facebook').Strategy
 	, GoogleStrategy = require('passport-google-oauth').Strategy
-	, User = mongoose.model('User')
+	, User = mongoose.model('User');
 
 
 module.exports = function (passport, config) {
@@ -16,7 +16,7 @@ module.exports = function (passport, config) {
 	})
 
 	passport.deserializeUser(function(id, done) {
-		User.findOne({ _id: id }, function (err, user) {
+		User.findOne({ _id: id }).populate("articles","comments facebook google twitter").exec(function (err, user) {
 			done(err, user)
 		})
 	})

@@ -5,7 +5,10 @@ module.exports = {
         detail: "x200"
       },
       crop: {
-        thumb: "90x90"
+        thumb : "90x90"
+      }
+      resizeAndCrop: {
+        mini : { resize: "x90" , crop: "50x50" }
       }
     },
     article: {

@@ -43,6 +43,6 @@ var port = process.env.PORT || 3000
 app.listen(port)
 
 
-console.log(app.routes)
+//console.log(app.routes)
 console.log('Express app started on port '+port)
 

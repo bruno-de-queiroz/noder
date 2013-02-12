@@ -3,7 +3,7 @@ var async = require('async')
 , view_path = '/';
 
 module.exports = function(app,passport,auth) {
-	
+
 	var index = function(req,res){
 		res.redirect('/articles');
 	};

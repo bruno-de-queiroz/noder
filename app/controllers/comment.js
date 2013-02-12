@@ -16,7 +16,7 @@ var CommentController = function(app,passport,auth){
 
 				comment.save(function (err) {
 					if (err) throw new Error(app.locals.__('Error while saving comment'))
-						article.comments.push(comment._id)
+					article.comments.push(comment._id)
 					article.save(function (err) {
 						if (err) throw new Error(app.locals.__('Error while saving article'))
 							res.redirect('/articles/'+article.id+'#comments')

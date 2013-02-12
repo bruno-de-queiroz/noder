@@ -1,26 +1,30 @@
 header#left-header
 	h1#logo Noder
 	if(req.user)
-		div#user-info
+		- console.log(req.user)
+		section#user-info
 			figure.picture
 				if(req.user.picture.files.mini)
 					img(src=req.user.picture.files.mini)
 				else
 					i.icon.plus.add-image
-			h2 #{req.user.username}
-				aside#tools
-					i.icon.cog
-					i.icon.off
-			p.overview
-				i.icon.file
-				| #{req.user.articles}
-				em #{__("articles")}
-				i.icon.comment
-				| #{req.user.comments} 
-				em #{__("comments")}
-				i.icon.share
-				| #{req.user.shares} 
-				em #{__("shares")}
-				i.icon.thumbs-up
-				| #{req.user.likes}
-				em #{__("likes")}
+			div.info
+				h2 #{req.user.fullName}
+				ul#tools
+					li
+						i.icon.cog
+					li
+						i.icon.off
+				p.overview
+					i.icon.file
+					| &nbsp;#{req.user.meta.total}&nbsp;
+					em #{__("articles")}&nbsp;&nbsp;
+					i.icon.comment
+					| &nbsp;#{req.user.meta.comments}&nbsp;
+					em #{__("comments")}&nbsp;&nbsp;
+					i.icon.share
+					| &nbsp;#{req.user.meta.shares}&nbsp;
+					em #{__("shares")}&nbsp;&nbsp;
+					i.icon.thumbs-up
+					| &nbsp;#{req.user.meta.likes}&nbsp;
+					em #{__("likes")}&nbsp;&nbsp;

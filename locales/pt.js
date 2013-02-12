@@ -58,5 +58,10 @@
 	"articles": "articles",
 	"comments": "comments",
 	"shares": "shares",
-	"likes": "likes"
+	"likes": "likes",
+	"use facebook": "use facebook",
+	"use twitter": "use twitter",
+	"use google": "use google",
+	"First name": "First name",
+	"Last name": "Last name"
 }

@@ -18,10 +18,22 @@ var ArticleSchema = new Schema({
 	, comments: [{type : Schema.ObjectId, ref : 'Comment'}]
 	, tags: {type: [], get: getTags, set: setTags}
 	, image: {
-				cdnUri: String
-			, files: []
-		}
+		cdnUri: String
+		, files: []
+	}
 	, categories: []
+	, facebook : {
+		shares : []
+		, likes : []
+	}
+	, twitter : {
+		retweets : []
+		, followers : []
+	}
+	, google : {
+		plus : []
+		, shares : []
+	}
 	, createdAt  : {type : Date, default : Date.now}
 })
 
