@@ -1,20 +1,45 @@
 extends ../layouts/default
 
 block left-content
-  h1= __('Articles')
-  each article in articles
-    .article
-      a.title(href='/articles/'+article._id, title=article.title) #{article.title}
-      p=article.body
-      .author
-        span= __d(article.createdAt)
-        span &nbsp;| #{__('Author')} :&nbsp;
-        a(href="/users/"+article.user._id)=article.user.name
-        | &nbsp;|&nbsp;
-        if (article.tags)
-          span.tags
-            span #{__('Tags')} :&nbsp;
-            each tag in article.tags.split(',')
-              a.tag(href="/tags/"+tag)
-                i.icon.tags
-                |  #{tag}
+	h1= __('Articles')
+	ul
+		each article in articles
+			li
+				span.action
+					i.icon.eye-open
+					i.icon.chevron-right
+				article
+					h2
+						a.title(href='/articles/'+article._id, title=article.title, target="_blank") #{article.title}
+					p
+						i.icon.time
+						| &nbsp;#{__d(article.createdAt)}&nbsp;&nbsp;
+						if(!article.published)
+							a(href='/articles/'+article._id+'/edit',title=__("Edit"))
+								i.icon.edit
+								| &nbsp;#{__("Edit article")}&nbsp;&nbsp;
+							span.link.remove(rel=article._id,title=__("Remove"))
+								i.icon.remove-sign
+								| &nbsp;#{__("Remove")}&nbsp;&nbsp;
+						else
+							i.icon.comment
+							| &nbsp;#{article.comments.length}&nbsp;
+							| #{__("comments")}&nbsp;&nbsp;
+							i.icon.share
+							| &nbsp;#{req.user.meta.shares}&nbsp;
+							| #{__("shares")}&nbsp;&nbsp;
+							i.icon.thumbs-up
+							| &nbsp;#{req.user.meta.likes}&nbsp;
+							| #{__("likes")}&nbsp;&nbsp;
+
+						if (article.tags)
+							i.icon.tags
+							| &nbsp;#{__('Tags')}&nbsp;
+							each tag in article.tags.split(',')
+								a(href="/tags/"+tag)= tag
+				if(article.published)
+					p
+						i.icon.check
+						| #{__("Published")}
+				else
+					span.button.purple(rel=article._id,title=__("Publish")) #{__("Publish")}

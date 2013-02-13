@@ -63,5 +63,13 @@
 	"use twitter": "use twitter",
 	"use google": "use google",
 	"First name": "First name",
-	"Last name": "Last name"
+	"Last name": "Last name",
+	"Settings": "Settings",
+	"Logout": "Logout",
+	"Comments": "Comments",
+	"Shares": "Shares",
+	"Likes": "Likes",
+	"Edit article": "Edit article",
+	"Remove": "Remove",
+	"Publish": "Publish"
 }

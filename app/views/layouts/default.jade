@@ -10,15 +10,18 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml')
 							li= error.type
 
 
-		section#left-content
+		section#left
 			include ../includes/left.jade
-			block left-content
+			section#left-content
+				block left-content
 
-		section#mid-content
-			block mid-content
+		section#mid
+			section#mid-content
+				block mid-content
 
-		section#right-content
+		section#right
 			include ../includes/right.jade
-			block right-content
+			section#right-content
+				block right-content
 
 		include ../includes/foot

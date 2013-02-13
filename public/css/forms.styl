@@ -13,3 +13,16 @@ input[type=text], input[type=date], input[type=number], input[type=password], te
 		background white
 		outline none
 		transition all .2s
+
+input[type=checkbox]
+	appearance none
+
+input[type=checkbox]:before
+	content '\f096'
+	font-family iconfont
+	font-size 16px
+	color main-grey-color
+
+input[type=checkbox]:checked:before
+	content '\f046'
+	color green-color

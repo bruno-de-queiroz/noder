@@ -34,6 +34,7 @@ var ArticleSchema = new Schema({
 		plus : []
 		, shares : []
 	}
+	, published : {type : Boolean, default : false}
 	, createdAt  : {type : Date, default : Date.now}
 })
 

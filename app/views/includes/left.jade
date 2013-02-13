@@ -12,19 +12,25 @@ header#left-header
 				h2 #{req.user.fullName}
 				ul#tools
 					li
-						i.icon.cog
+						a(href="/users/"+req.user._id, title=__("Settings"))
+							i.icon.cog
 					li
-						i.icon.off
+						a(href="/logout",title=__("Logout"))
+							i.icon.off
 				p.overview
-					i.icon.file
-					| &nbsp;#{req.user.meta.total}&nbsp;
-					em #{__("articles")}&nbsp;&nbsp;
-					i.icon.comment
-					| &nbsp;#{req.user.meta.comments}&nbsp;
-					em #{__("comments")}&nbsp;&nbsp;
-					i.icon.share
-					| &nbsp;#{req.user.meta.shares}&nbsp;
-					em #{__("shares")}&nbsp;&nbsp;
-					i.icon.thumbs-up
-					| &nbsp;#{req.user.meta.likes}&nbsp;
-					em #{__("likes")}&nbsp;&nbsp;
+					a(href="/articles",title=__("Articles"))
+						i.icon.file
+						| &nbsp;#{req.user.meta.total}&nbsp;
+						em #{__("articles")}&nbsp;&nbsp;
+					a(href="/articles#comments",title=__("Comments"))
+						i.icon.comment
+						| &nbsp;#{req.user.meta.comments}&nbsp;
+						em #{__("comments")}&nbsp;&nbsp;
+					a(href="/articles#shares",title=__("Shares"))
+						i.icon.share
+						| &nbsp;#{req.user.meta.shares}&nbsp;
+						em #{__("shares")}&nbsp;&nbsp;
+					a(href="/articles#likes",title=__("Likes"))
+						i.icon.thumbs-up
+						| &nbsp;#{req.user.meta.likes}&nbsp;
+						em #{__("likes")}&nbsp;&nbsp;

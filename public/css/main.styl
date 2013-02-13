@@ -95,14 +95,16 @@ header#left-header
 					display inline-block
 					background white
 					vertical-align middle
-					.icon
-						color darken(background-color,10)
-						cursor pointer
-						line-height 22px
-						font-size 14px
-						padding 0 5px
-						&:hover
-							color main-grey-color
+					a
+						text-decoration none
+						.icon
+							color darken(background-color,10)
+							cursor pointer
+							line-height 22px
+							font-size 14px
+							padding 0 5px
+							&:hover
+								color main-grey-color
 				li + li
 					border-left 1px solid #DDD
 			h2
@@ -115,8 +117,12 @@ header#left-header
 			p
 				font-family marvel
 				font-size 20px
-				color main-grey-color
 				margin 3px 0
+				a
+					text-decoration none
+					color main-grey-color
+					&:hover
+						color lighten(main-grey-color,15)
 				em
 					font-style italic
 					font-size 16px
@@ -294,3 +300,75 @@ section#signup
 			position absolute
 			top -18px
 			left 0
+
+section#left-content
+	padding 25px
+	h1
+		font-family ostrich
+		font-size 46px
+		color main-color
+	ul
+		li
+			background lighten(background-color,2)
+			box-shadow 0 -2px 0px darken(background-color,10)
+			padding 10px
+			border-radius 5px
+			overflow hidden
+			position relative
+			span.action
+				cursor pointer
+				position absolute
+				left 10px
+				top 50%
+				margin-top -17px
+				display inline-block
+				width 45px
+				text-align center
+				color darken(background-color,5)
+				font-size 32px
+				&:hover
+					color darken(background-color,10)
+				i.icon.chevron-right
+					display none
+				&.active
+					cursor default
+					color main-color
+					border none
+					padding 0
+					i.icon.eye-open
+						display none
+					i.icon.chevron-right
+						display block
+			span.button
+				position absolute
+				right 20px
+				top 50%
+				margin-top -17px
+				width 150px
+			article
+				margin 0 0 0 50px
+				h2
+					font-size 20px
+					font-weight 300
+					font-family opensans
+					a
+						color  main-color
+				a
+					text-decoration none
+					vertical-align middle
+				p
+					color main-grey-color
+					font-size 16px
+					font-family marvel
+					margin 10px 0
+					vertical-align middle
+					i.icon
+						vertical-align baseline
+					a, .link
+						vertical-align baseline
+						cursor pointer
+						color main-grey-color
+						&:hover
+							color lighten(main-grey-color,20)
+			&.active
+				background white
