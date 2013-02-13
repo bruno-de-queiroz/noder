@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block left-content
+
+	h1= __('Feeds')
+	hr
+	each feed in feeds
+		article
+			h1
+				a.title(href='/feeds/'+feed._id, title=feed.title) #{feed.title}
+			p=feed.url
+			
+	if (pages > 1)
+		nav.pagination
+			ul
+				!= createPagination(pages, page)

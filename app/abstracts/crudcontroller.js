@@ -76,7 +76,7 @@ var auth = require('../../config/middlewares/authorization')
 								if (err) return res.render('500')
 								baseModel.count().exec(function (err, count) {
 									var data = {};
-									
+
 									data.title = lang('List of %s',capital);
 									data[plural] = results;
 									data.pageName = plural + "-index";
@@ -94,11 +94,10 @@ var auth = require('../../config/middlewares/authorization')
 					, filters : [ auth.requiresLogin ]
 					, render : function(req,res){
 						var data = {};
-							
+
 						data.title = lang('New '+ capital)
 						data[singular] = new baseModel({})
 						data.pageName = plural + "-add";
-
 						res.render( plural + '/add', data);
 					}
 				}

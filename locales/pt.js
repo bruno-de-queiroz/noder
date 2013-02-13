@@ -75,5 +75,14 @@
 	"Metrics": "Metrics",
 	"Statistics": "Statistics",
 	"Followers": "Followers",
-	"+1": "+1"
+	"+1": "+1",
+	"Anything to search": "Anything to search",
+	"Published": "Published",
+	"New Feeds": "New Feeds",
+	"New Feed": "New Feed",
+	"Url": "Url",
+	"Enter the feed url": "Enter the feed url",
+	"View Feed": "View Feed",
+	"Feeds": "Feeds",
+	"Edit Feed": "Edit Feed"
 }

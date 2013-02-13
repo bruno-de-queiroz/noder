@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block left-content
+	block left-title
+	- var action = '/feeds/add'
+		if (!feed.isNew)
+			- action = '/feeds/'+feed.id
+
+	form(method="post", action=action, enctype="multipart/form-data")
+		if (!feed.isNew)
+			input(type="hidden", name="_method", value="PUT")
+
+		fieldset#title
+			label(for='title-input') #{__('Title')}
+			input#title-input(type='text', name="title", value=feed.title, placeholder="#{__('Enter the title')}")
+
+		fieldset#body
+			label(for='url-input') #{__('Url')}
+			textarea#body-input(type='text', rows="5", name="url", placeholder="#{__('Enter the feed url')}")=feed.url
+
+		fieldset#actions
+			button(type='submit') #{__('Save changes')}
+			&nbsp;
+			a.button-like(href='/feeds', title="cancel") #{__('Cancel')}

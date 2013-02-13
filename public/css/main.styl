@@ -305,6 +305,25 @@ section#left-content
 	padding 25px
 	overflow-x hidden
 	overflow-y auto
+	position relative
+	aside#search
+		position absolute
+		right 25px
+		top 25px
+		input
+			font-size 13px
+			color darken(background-color,30)
+			background none
+			border-radius 0
+			box-shadow none
+			width 120px
+			vertical-align middle
+			padding 10px
+			margin 0
+		i.icon
+			font-size 18px
+			color main-color
+			vertical-align -2px
 	h1
 		font-family ostrich
 		font-size 46px
@@ -317,6 +336,21 @@ section#left-content
 			border-radius 5px
 			overflow hidden
 			position relative
+			p.published
+				position absolute
+				right 20px
+				top 50%
+				margin-top -10px
+				em
+					font-style italic
+					font-family marvel
+					font-size 16px
+					color darken(background-color,20)
+					vertical-align middle
+				i.icon
+					color green-color
+					font-size 20px
+					vertical-align middle
 			span.action
 				cursor pointer
 				position absolute
@@ -387,6 +421,8 @@ section#left
 	top 0
 	overflow hidden
 
+.user-setup-page section#right, .login-page section#right
+	display none
 
 section#right
 	background white
