@@ -6,7 +6,7 @@ module.exports = {
       },
       crop: {
         thumb : "90x90"
-      }
+      },
       resizeAndCrop: {
         mini : { resize: "x90" , crop: "50x50" }
       }

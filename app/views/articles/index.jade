@@ -43,3 +43,40 @@ block left-content
 						| #{__("Published")}
 				else
 					span.button.purple(rel=article._id,title=__("Publish")) #{__("Publish")}
+
+
+block right-content
+	h1 #{__("Metrics")}&nbsp;
+		i.icon.chevron-down
+	h2 #{__("Statistics")}&nbsp;
+		i.icon.plus-sign
+	canvas#graph
+	ul#metrics-info
+		li.block
+			h3 #{__("Likes")}
+			ul
+				- for (var i = 0; i < 16; ++i)
+					li
+						span.image.example
+		li.block
+			h3 #{__("Followers")}
+			ul
+				- for (var i = 0; i < 16; ++i)
+					li
+						span.image.example
+		li.block
+			h3 #{__("+1")}
+			ul
+				- for (var i = 0; i < 16; ++i)
+					li
+						span.image.example
+	section#comments
+		h3 #{__("Comments")}
+		ul
+			- for (var i = 0; i < 8; ++i)
+				li.comment
+					span.image.example
+					article
+						h4 Bruno de Queiroz
+						i.icon.time  6 minutes ago
+						p Very interesting way to blog about something...

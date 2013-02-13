@@ -303,6 +303,8 @@ section#signup
 
 section#left-content
 	padding 25px
+	overflow-x hidden
+	overflow-y auto
 	h1
 		font-family ostrich
 		font-size 46px
@@ -370,5 +372,98 @@ section#left-content
 						color main-grey-color
 						&:hover
 							color lighten(main-grey-color,20)
+					.tags + a
+						color main-color
+						&:hover
+							text-decoration underline
 			&.active
 				background white
+
+section#left
+	position fixed
+	left 0
+	right 40%
+	bottom 0
+	top 0
+	overflow hidden
+
+
+section#right
+	background white
+	position fixed
+	top 0
+	right 0
+	left 60%
+	box-shadow -5px 0 5px darken(background-color,5)
+	bottom 0
+	overflow-x hidden
+	overflow-y auto
+	padding 10px 20px
+	h1
+		font-family ostrich
+		color main-color
+		font-size 32px
+		margin 0 0 20px 0
+		i.icon
+			font-size 13px
+			vertical-align middle
+	h2
+		font-size 16px
+		color main-grey-color
+		font-family opensans
+	h3
+		font-size 14px
+		color main-grey-color
+		font-family opensans
+
+ul#metrics-info
+	display inline-block
+	vertical-align top
+	width 50%
+	li.block
+		display inline-block
+		vertical-align top
+		h3
+			margin 10px 0 10px 0
+		ul
+			li
+				display inline-block
+
+section#comments
+	width 50%
+	vertical-align top
+	display inline-block
+	h3
+		margin 10px 0 10px 0
+	ul
+		li
+			display block
+			overflow hidden
+			padding 0 0 10px 0
+			margin 0 0 10px 0
+			border-bottom 1px solid darken(background-color,5)
+			span.image.example
+				margin 0 10px
+				display inline-block
+				float left
+			article
+				overflow hidden
+				display block
+				h4
+					font-size 13px
+					font-family opensans
+					color main-color
+					display inline-block
+					margin 0 5px 5px 0
+				i.icon
+					color lighten(main-grey-color,10)
+				p
+					font-size 12px
+					color main-grey-color
+					margin 3px 0
+
+span.image.example
+	display block
+	width 32px
+	height 32px
+	background main-grey-color

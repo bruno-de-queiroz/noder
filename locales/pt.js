@@ -71,5 +71,9 @@
 	"Likes": "Likes",
 	"Edit article": "Edit article",
 	"Remove": "Remove",
-	"Publish": "Publish"
+	"Publish": "Publish",
+	"Metrics": "Metrics",
+	"Statistics": "Statistics",
+	"Followers": "Followers",
+	"+1": "+1"
 }

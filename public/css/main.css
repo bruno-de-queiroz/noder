@@ -344,7 +344,7 @@ section#signup .button{display:block;width:auto;text-decoration:none}
 .user-setup-page section#mid-content fieldset#bind-to a:hover{opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";-webkit-transition:all .2s;-moz-transition:all .2s;-o-transition:all .2s;-ms-transition:all .2s;transition:all .2s}
 .user-setup-page section#mid-content fieldset#action{position:absolute;bottom:0;background:#e6e6e6;padding:10px;left:0;right:0;text-align:center;}
 .user-setup-page section#mid-content fieldset#action:before{content:'';display:block;width:100%;height:30px;background:-o-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-o-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-o-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-o-linear-gradient(45deg,#e6e6e6 25%,transparent 25%);background:-moz-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-moz-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-moz-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-moz-linear-gradient(45deg,#e6e6e6 25%,transparent 25%);background:-webkit-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-webkit-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-webkit-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-webkit-linear-gradient(45deg,#e6e6e6 25%,rgba(255,255,255,0) 25%);-webkit-background-size:18px 18px;-moz-background-size:18px 18px;background-size:18px 18px;background-color:transparent;position:absolute;top:-18px;left:0}
-section#left-content{padding:25px;}
+section#left-content{padding:25px;overflow-x:hidden;overflow-y:auto;}
 section#left-content h1{font-family:'ostrich_sans_roundedmedium',sans-serif;font-size:46px;color:#8a25cd}
 section#left-content ul li{background:#eee;-webkit-box-shadow:0 -2px 0 #d0d0d0;box-shadow:0 -2px 0 #d0d0d0;padding:10px;-webkit-border-radius:5px;border-radius:5px;overflow:hidden;position:relative;}
 section#left-content ul li span.action{cursor:pointer;position:absolute;left:10px;top:50%;margin-top:-17px;display:inline-block;width:45px;text-align:center;color:#dcdcdc;font-size:32px;}
@@ -362,4 +362,25 @@ section#left-content ul li article p{color:#555;font-size:16px;font-family:'Marv
 section#left-content ul li article p i.icon{vertical-align:baseline}
 section#left-content ul li article p a,section#left-content ul li article p .link{vertical-align:baseline;cursor:pointer;color:#555;}
 section#left-content ul li article p a:hover,section#left-content ul li article p .link:hover{color:#888}
+section#left-content ul li article p .tags + a{color:#8a25cd;}
+section#left-content ul li article p .tags + a:hover{text-decoration:underline}
 section#left-content ul li.active{background:#fff}
+section#left{position:fixed;left:0;right:40%;bottom:0;top:0;overflow:hidden}
+section#right{background:#fff;position:fixed;top:0;right:0;left:60%;-webkit-box-shadow:-5px 0 5px #dcdcdc;box-shadow:-5px 0 5px #dcdcdc;bottom:0;overflow-x:hidden;overflow-y:auto;padding:10px 20px;}
+section#right h1{font-family:'ostrich_sans_roundedmedium',sans-serif;color:#8a25cd;font-size:32px;margin:0 0 20px 0;}
+section#right h1 i.icon{font-size:13px;vertical-align:middle}
+section#right h2{font-size:16px;color:#555;font-family:'Open Sans',sans-serif}
+section#right h3{font-size:14px;color:#555;font-family:'Open Sans',sans-serif}
+ul#metrics-info{display:inline-block;vertical-align:top;width:50%;}
+ul#metrics-info li.block{display:inline-block;vertical-align:top;}
+ul#metrics-info li.block h3{margin:10px 0 10px 0}
+ul#metrics-info li.block ul li{display:inline-block}
+section#comments{width:50%;vertical-align:top;display:inline-block;}
+section#comments h3{margin:10px 0 10px 0}
+section#comments ul li{display:block;overflow:hidden;padding:0 0 10px 0;margin:0 0 10px 0;border-bottom:1px solid #dcdcdc;}
+section#comments ul li span.image.example{margin:0 10px;display:inline-block;float:left}
+section#comments ul li article{overflow:hidden;display:block;}
+section#comments ul li article h4{font-size:13px;font-family:'Open Sans',sans-serif;color:#8a25cd;display:inline-block;margin:0 5px 5px 0}
+section#comments ul li article i.icon{color:#6e6e6e}
+section#comments ul li article p{font-size:12px;color:#555;margin:3px 0}
+span.image.example{display:block;width:32px;height:32px;background:#555}
