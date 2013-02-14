@@ -1,9 +1,13 @@
 extends ../layouts/default
 
+block scripts
+  script(src='/js/libs/wyzz/wyzz.js',type="application/javascript")
+  script(src='/js/articles/form.js',type="application/javascript")
+
 block left-content
   - var action = '/articles/add'
   if (!article.isNew)
-    - action += '/'+article.id
+    - action = '/articles/'+article.id
 
   if (typeof errors !== 'undefined')
     .fade.in.alert.alert-block.alert-error
@@ -31,7 +35,7 @@ block left-content
         .control-group
           label.control-label(for='desc') #{__('Body')}
           .controls
-            textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
+            textarea#desc.tinymce.input-xlarge(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
 
         .control-group
           label.control-label(for='desc') #{__('Tags')}

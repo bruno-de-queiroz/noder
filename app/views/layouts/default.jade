@@ -3,7 +3,7 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml')
 	include ../includes/head
 	body(class=pageName+"-page")
 		if (typeof errors !== 'undefined')
-				aside#messages		
+				aside#messages
 					a.close(data-dismiss="alert", href="javascript:void(0)") x
 					ul
 						each error in errors
