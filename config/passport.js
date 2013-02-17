@@ -47,23 +47,24 @@ module.exports = function (passport, config) {
 			, callbackURL: config.twitter.callbackURL
 		},
 		function(token, tokenSecret, profile, done) {
-			User.findOne({ 'twitter.id': profile.id }, function (err, user) {
+			User.findOne({ '_id': profile.id }, function (err, user) {
 				if (err) { return done(err) }
 				if (!user) {
 					user = new User({
 							name: profile.displayName
 						, username: profile.username
-						, provider: 'twitter'
+						, providers: ['twitter']
 						, twitter: profile._json
-					})
-					user.save(function (err) {
-						if (err) console.log(err)
-						return done(err, user)
 					})
 				}
 				else {
-					return done(err, user)
+					user.providers.push("twitter");
+					user.twitter: profile._json
 				}
+				user.save(function (err) {
+					if (err) console.log(err)
+					return done(err, user)
+				})
 			})
 		}
 	))
@@ -75,7 +76,7 @@ module.exports = function (passport, config) {
 			, callbackURL: config.facebook.callbackURL
 		},
 		function(accessToken, refreshToken, profile, done) {
-			User.findOne({ 'facebook.id': profile.id }, function (err, user) {
+			User.findOne({ '_id': profile.id }, function (err, user) {
 				if (err) { return done(err) }
 				if (!user) {
 					user = new User({
@@ -85,14 +86,15 @@ module.exports = function (passport, config) {
 						, provider: 'facebook'
 						, facebook: profile._json
 					})
-					user.save(function (err) {
-						if (err) console.log(err)
-						return done(err, user)
-					})
 				}
 				else {
-					return done(err, user)
+					user.providers.push("facebook");
+					user.twitter: profile._json
 				}
+				user.save(function (err) {
+					if (err) console.log(err)
+					return done(err, user)
+				})
 			})
 		}
 	))
@@ -104,22 +106,28 @@ module.exports = function (passport, config) {
 			callbackURL: config.google.callbackURL
 		},
 		function(accessToken, refreshToken, profile, done) {
-			User.findOne({ 'google.id': profile.id }, function (err, user) {
+			User.findOne({ '_id': profile.id }, function (err, user) {
 				if (!user) {
+					var new_profile = {}
+					new_profile.id = profile.id
+					new_profile.displayName = profile.displayName
+					new_profile.emails = profile.emails
+					console.log(profile);
 					user = new User({
-							name: profile.displayName
+						name: profile.displayName
 						, email: profile.emails[0].value
 						, username: profile.username
 						, provider: 'google'
-						, google: profile._json
-					})
-					user.save(function (err) {
-						if (err) console.log(err)
-						return done(err, user)
+						, google: new_profile._json
 					})
 				} else {
-					return done(err, user)
+					user.providers.push("google");
+					user.twitter: profile._json
 				}
+				user.save(function (err) {
+					if (err) console.log(err)
+					return done(err, user)
+				})
 			})
 		}
 	));

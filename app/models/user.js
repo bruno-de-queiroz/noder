@@ -9,10 +9,10 @@ var mongoose = require('mongoose')
 var UserSchema = new Schema(
 	{
 		name: String
-		, lastName : String
+		, lastName : { type: String, default :  ''}
 		, email: String
 		, username: String
-		, provider: String
+		, providers: [{ type: String }]
 		, hashed_password: String
 		, salt: String
 		, facebook: {}

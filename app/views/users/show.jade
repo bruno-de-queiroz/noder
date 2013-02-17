@@ -9,7 +9,7 @@ block mid-content
 					img(src=user.picture.files.thumb)
 				else
 					i.icon.plus-sign.add-image
-			input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username)
+			input#username(type='text', name="lastName", placeholder="#{__('Lastname')}", value=user.lastname)
 			input#blogtitle(type='text',name="blog.title", placeholder="#{__('Blog title')}", value=user.blog.title)
 			textarea#blogdescription(name="blog.descripton",placeholder="#{__('Blog description')}")= user.blog.description
 		fieldset#bind-to
