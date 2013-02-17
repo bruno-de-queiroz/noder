@@ -6,6 +6,7 @@ var mongoose = require('mongoose')
 var FeedSchema = new Schema({
 	title : { type: String, default : ''}
 	, url : String
+	, articles : {}
 })
 
 mongoose.model('Feed', FeedSchema)

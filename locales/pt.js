@@ -86,5 +86,6 @@
 	"Feeds": "Feeds",
 	"Edit Feed": "Edit Feed",
 	"Add article": "Add article",
-	"No articles written": "No articles written"
+	"No articles written": "No articles written",
+	"Failed to load %s": "Failed to load %s"
 }

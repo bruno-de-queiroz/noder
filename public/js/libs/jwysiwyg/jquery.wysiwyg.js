@@ -504,7 +504,7 @@
 		};
 
 		this.defaults = {
-html: '<!DOCTYPE html><html><head><link href="../../../css/libs/jwysiwyg/jquery.wysiwyg.content.css" media="all" rel="stylesheet" type="text/css"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="margin:0;">INITIAL_CONTENT</body></html>',
+html: '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="margin:0;">INITIAL_CONTENT</body></html>',
 			debug: false,
 			controls: {},
 			css: {},
@@ -569,6 +569,7 @@ html: '<!DOCTYPE html><html><head><link href="../../../css/libs/jwysiwyg/jquery.
 		];
 
 		this.editor			= null;  //jquery iframe holder
+		this.editorWindow	= null;
 		this.editorDoc		= null;
 		this.element		= null;
 		this.options		= {};
@@ -1362,6 +1363,7 @@ html: '<!DOCTYPE html><html><head><link href="../../../css/libs/jwysiwyg/jquery.
 				.append(self.editor)
 				.append(self.original);
 
+			self.editorWindow = self.innerWindow();
 			self.editorDoc = self.innerDocument();
 
 			if (self.isDestroyed) {
@@ -1637,6 +1639,22 @@ html: '<!DOCTYPE html><html><head><link href="../../../css/libs/jwysiwyg/jquery.
 				}
 
 				console.error("Unexpected error in innerDocument");
+			}
+
+			return element;
+		};
+
+		this.innerWindow = function () {
+			var element = this.editor.get(0);
+
+			if (element.nodeName.toLowerCase() === "iframe") {
+				return element.contentWindow;
+
+				if (this.isDestroyed) {
+					return null;
+				}
+
+				console.error("Unexpected error in innerWindow");
 			}
 
 			return element;

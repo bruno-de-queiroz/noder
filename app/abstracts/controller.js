@@ -62,8 +62,8 @@ var BaseController = function(name,app,passport,auth){
 			, render : function(req,res,controller){}
 		}
 		, destroy : {
-			mapping : __map + "/:" + __name + "Id"
-			, method : "del"
+			mapping : __map + "/:" + __name + "Id" + "/destroy"
+			, method : "get"
 			, filters : [] //[ auth.requiresLogin , auth.hasAuthorization ]
 			, render : function(req,res,controller){}
 		}

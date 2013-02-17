@@ -5,6 +5,7 @@
 	"private": "true",
 	"author": "Bruno de Queiroz <creativelikeadog@gmail.com>",
 	"dependencies": {
+		"feedparser":"latest",
 		"socket.io":"latest",
 		"express":"latest",
 		"prototype":"latest",	

@@ -2,19 +2,61 @@ var ArticleController = function(app,passport,auth){
 
 	var controller = require("../abstracts/controller")
 	, _ = require('lodash')
-	, Articles = new controller("articles",app,passport,auth);
+	, async = require('async')
+	, rss = require('feedparser')
+	, Articles = new controller("articles",app,passport,auth)
+	, getFeeds = function(feeds,callback){
+		var Feed = mongoose.model("Feed")
+			, feedsList = {}
+
+		Feed.find({ _id : { $in : feeds } },function(err,feeds) {
+			if(err) callback.call(this,err,null)
+			var populateFeed = function (feed, cb) {
+				var today = new Date()
+					, day = new Date(today.getYear(),today.getMonth(),today.getDay()-10).toString()
+					, req = {
+						uri: feed.url
+						, headers: {
+							'If-Modified-Since': day
+						}
+				}
+				rss.parseUrl(req).on("article",function(articles){
+					feed.articles = articles;
+					feed.save(function(err,feed){
+						if(err) console.log("Error saving feed");
+					})
+				}).on("error",function(err){
+					console.log("Error fetching articles from "+feed.url)
+				});
+			}
+
+			if (feeds.length) {
+				async.map(feeds, populateFeed, function (err, results) {
+					console.log(err);
+				})
+			}
+
+			callback.call(this,null,feeds)
+		});
+	}
+
 
 	Articles.import([ 'imager' ]).extend({
 		add : {
 			filters : [ auth.requiresLogin ]
 			, render : function(req, res){
-				var Article = Articles.model('Article');
+				var Article = Articles.model('Article'),
+					userFeeds = req.user.feeds;
 
-				res.render( Articles.name() + '/add', {
-					title: app.locals.__('New Article')
-					, pageName: Articles.name() + "-add"
-					, article: new Article({})
-				})
+				getFeeds(userFeeds,function(err,feeds){
+					if(err) throw new Error(app.locals.__('Error while fetching feeds'))
+					res.render( Articles.name() + '/add', {
+						title: app.locals.__('New Article')
+						, pageName: Articles.name() + "-add"
+						, article: new Article({})
+						, feeds : feeds
+					})
+				});
 			}
 		}
 		, create : {
@@ -111,11 +153,24 @@ var ArticleController = function(app,passport,auth){
 		, destroy : {
 			filters : [ auth.requiresLogin , auth.hasAuthorization ]
 			, render : function(req, res){
-				var article = req.article
-				article.remove(function(err){
-					// req.flash('notice', 'Deleted successfully')
-					res.redirect('/' + Articles.name())
-				})
+				var User = Articles.model("User")
+				, article = req.article;
+				console.log(article.user);
+				User.findOne({ _id : article.user }).populate("articles","_id").exec(function(err,user) {
+					for(var i=0,j=user.articles.length;i<j;i++)
+						if(user.articles[i]._id == article._id)
+							user.articles.slice(i,1);
+
+					user.save(function(err){
+						if(err)
+							throw new Error(app.locals.__('Error while removing article from user'))
+
+						article.remove(function(err){
+							// req.flash('notice', 'Deleted successfully')
+							res.redirect('/' + Articles.name())
+						})
+					})
+				});
 			}
 		}
 		, index : {

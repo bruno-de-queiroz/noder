@@ -179,8 +179,8 @@ var auth = require('../../config/middlewares/authorization')
 					}
 				}
 				, destroy : {
-					mapping : "/" + plural + "/:" + idparam
-					, method : "del"
+					mapping : "/" + plural + "/:" + idparam + "/destroy"
+					, method : "get"
 					, filters : [ auth.requiresLogin , auth.hasAuthorization ]
 					, render : function(req,res){
 						var model = req[singular]
@@ -201,9 +201,8 @@ var auth = require('../../config/middlewares/authorization')
 							next()
 					})
 			}
-
-			_.merge(this.routes,routes);
-			_.merge(this.filters,filters);
+			this.routes = _.merge(routes,this.routes);
+			this.filters = _.merge(filters,this.filters);
 		}
 	})
 

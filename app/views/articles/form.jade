@@ -27,6 +27,7 @@ block left-content
 			input#images(type='file', name="image[]")
 			input#title(type='text', name="title", value=article.title, placeholder="#{__('Enter the title')}")
 			input#tags(type='text', name="tags", value=article.tags, placeholder="#{__('Enter the tags')}")
+			button.green(type='button') #{__('Save')}
 		textarea#desc(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
 
 		fieldset#action
@@ -34,3 +35,23 @@ block left-content
 		//.span5
 		//	if (!article.isNew && article.image && article.image.files && article.image.files.length)
 		//		img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
+
+block right-header
+	h1 #{__('Inspirations')}
+		a(href="#add-feed",title=__('Add Feed'),class='async add-feed')
+			i.icon.plus-sign
+	aside#search
+		input(type="text",name="search",placeholder=__("Anything to search"))
+		i.icon.search
+	aside#add-feed
+		fieldset.search
+			input(type='text',name='feed-search',placeholder=__('Feed url'))
+			i.icon.search
+		ul.feeds-list
+			li
+				p.no-entries
+					i.icon.warning
+					|   #{__('No feed found')}
+
+block right-content
+
