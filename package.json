@@ -6,7 +6,6 @@
 	"author": "Bruno de Queiroz <creativelikeadog@gmail.com>",
 	"dependencies": {
 		"feedparser":"0.12.0",
-		"socket.io":"1.0.0",
 		"express":"3.1.0",
 		"connect-mongo": "0.3.2",
 		"connect-flash": "0.1.0",
