@@ -33,7 +33,7 @@ module.exports = {
 		app: {
 			name: 'Noder - Social Blogger'
 		},
-		db: 'mongodb://localhost/noder',
+		db: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/noder',
 		facebook: {
 			clientID: "486133094757475"
 			, clientSecret: "fa587fbedb18b7ec1866f96a7f41f967"
