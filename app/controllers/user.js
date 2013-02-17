@@ -10,7 +10,7 @@ var UserController = function(app,passport,auth){
 		}
 		, authCallback: {
 			render : function (req, res, next) {
-				res.redirect('/');
+				res.redirect('/signup');
 			}
 		}
 		, login : {
