@@ -60,5 +60,14 @@
 	"Inspirations": "Inspirations",
 	"Add Feed": "Add Feed",
 	"Feed url": "Feed url",
-	"No feed found": "No feed found"
+	"No feed found": "No feed found",
+	"Account info": "Account info",
+	"Lastname": "Lastname",
+	"Blog title": "Blog title",
+	"Blog description": "Blog description",
+	"Bind to": "Bind to",
+	"add a facebook account": "add a facebook account",
+	"add a twitter account": "add a twitter account",
+	"add a google account": "add a google account",
+	"Auto publish articles in all accounts": "Auto publish articles in all accounts"
 }

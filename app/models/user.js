@@ -9,7 +9,6 @@ var mongoose = require('mongoose')
 var UserSchema = new Schema(
 	{
 		name: String
-		, lastName : { type: String, default :  ''}
 		, email: String
 		, username: String
 		, providers: [{ type: String }]
@@ -39,11 +38,6 @@ UserSchema
 		this.hashed_password = this.encryptPassword(password)
 	})
 	.get(function() { return this._password })
-
-UserSchema
-	.virtual('fullName').get(function() {
-		return this.name + " " + this.lastName;
-	});
 
 UserSchema
 	.virtual('meta').get(function() {
@@ -84,12 +78,6 @@ UserSchema.path('name').validate(function (name) {
 	if (authTypes.indexOf(this.provider) !== -1) return true
 	return name.length
 }, 'Name cannot be blank')
-
-UserSchema.path('lastName').validate(function (lastName) {
-	// if you are authenticating by any of the oauth strategies, don't validate
-	if (authTypes.indexOf(this.provider) !== -1) return true
-	return lastName.length
-}, 'Last name cannot be blank')
 
 UserSchema.path('email').validate(function (email) {
 	// if you are authenticating by any of the oauth strategies, don't validate

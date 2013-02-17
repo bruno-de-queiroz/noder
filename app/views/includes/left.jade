@@ -9,7 +9,7 @@ header#left-header
 				else
 					i.icon.plus.add-image
 			div.info
-				h2 #{req.user.fullName}
+				h2 #{req.user.name}
 				ul#tools
 					li
 						a(href="/users/"+req.user._id, title=__("Settings"))
