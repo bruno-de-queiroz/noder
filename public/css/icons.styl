@@ -12,7 +12,29 @@ i.icon
 	background-image none
 	background-position 0% 0%
 	background-repeat repeat
-	margin-top: 0
+	margin-top 0
+	&:before
+		content "\f071"
+	&.html:before
+		font-size 8px
+		content: "HTML"
+		vertical-align 1px
+	&.h1:before
+		font-family "Times new roman"
+		font-weight bold
+		content: "H1"
+	&.h2:before
+		font-family "Times new roman"
+		font-weight bold
+		content: "H2"
+	&.h3:before
+		font-family "Times new roman"
+		font-weight bold
+		content: "H3"
+	&.h4:before
+		font-family "Times new roman"
+		font-weight bold
+		content: "H4"
 	&.glass:before
 		content "\f000"
 	&.music:before
@@ -71,7 +93,7 @@ i.icon
 		content "\f01c"
 	&.play-circle:before
 		content "\f01d"
-	&.repeat:before
+	&.repeat:before, &.redo:before
 		content "\f01e"
 	&.refresh:before
 		content "\f021"
@@ -105,8 +127,11 @@ i.icon
 		content "\f02f"
 	&.camera:before
 		content "\f030"
-	&.font:before
+	&.font:before, &.increasefontsize:before
 		content "\f031"
+	&.decreasefontsize:before
+		content "\f031"
+		font-size 10px
 	&.bold:before
 		content "\f032"
 	&.italic:before
@@ -115,23 +140,23 @@ i.icon
 		content "\f034"
 	&.text-width:before
 		content "\f035"
-	&.align-left:before
+	&.align-left:before, &.justifyleft:before
 		content "\f036"
-	&.align-center:before
+	&.align-center:before, &.justifycenter:before
 		content "\f037"
-	&.align-right:before
+	&.align-right:before, &.justifyright:before
 		content "\f038"
-	&.align-justify:before
+	&.align-justify:before, &.justifyfull:before
 		content "\f039"
 	&.list:before
 		content "\f03a"
-	&.indent-left:before
+	&.indent-left:before, &.indent:before
 		content "\f03b"
-	&.indent-right:before
+	&.indent-right:before, &.outdent:before
 		content "\f03c"
 	&.facetime-video:before
 		content "\f03d"
-	&.picture:before
+	&.picture:before, &.insertimage:before
 		content "\f03e"
 	&.pencil:before
 		content "\f040"
@@ -191,7 +216,7 @@ i.icon
 		content "\f05c"
 	&.ok-circle:before
 		content "\f05d"
-	&.ban-circle:before
+	&.ban-circle:before, &.removeformat:before
 		content "\f05e"
 	&.arrow-left:before
 		content "\f060"
@@ -351,7 +376,7 @@ i.icon
 		content "\f0b2"
 	&.group:before
 		content "\f0c0"
-	&.link:before
+	&.link:before, &.createlink:before
 		content "\f0c1"
 	&.cloud:before
 		content "\f0c2"
@@ -369,15 +394,15 @@ i.icon
 		content "\f0c8"
 	&.reorder:before
 		content "\f0c9"
-	&.list-ul:before
+	&.list-ul:before, &.insertunorderedlist:before
 		content "\f0ca"
-	&.list-ol:before
+	&.list-ol:before, &.insertorderedlist:before
 		content "\f0cb"
 	&.strikethrough:before
 		content "\f0cc"
 	&.underline:before
 		content "\f0cd"
-	&.table:before
+	&.table:before, &.inserttable:before
 		content "\f0ce"
 	&.magic:before
 		content "\f0d0"

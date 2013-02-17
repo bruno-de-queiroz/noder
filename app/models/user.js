@@ -18,6 +18,7 @@ var UserSchema = new Schema(
 		, facebook: {}
 		, twitter: {}
 		, google: {}
+		, feeds: []
 		, picture : {
 				cdnUri: String
 				, files: []

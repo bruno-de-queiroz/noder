@@ -2,50 +2,56 @@ extends ../layouts/default
 
 block left-content
 	h1= __('Articles')
+		a(href="/articles/add", title=__("Add article"))
+			i.icon.plus-sign
 	aside#search
 		input(type="text",name="search",placeholder=__("Anything to search"))
 		i.icon.search
 	ul
-		each article in articles
-			li
-				span.action
-					i.icon.eye-open
-					i.icon.chevron-right
-				article
-					h2
-						a.title(href='/articles/'+article._id, title=article.title, target="_blank") #{article.title}
-					p
-						i.icon.time
-						| &nbsp;#{__d(article.createdAt)}&nbsp;&nbsp;
-						if(!article.published)
-							a(href='/articles/'+article._id+'/edit',title=__("Edit"))
-								i.icon.edit
-								| &nbsp;#{__("Edit article")}&nbsp;&nbsp;
-							span.link.remove(rel=article._id,title=__("Remove"))
-								i.icon.remove-sign
-								| &nbsp;#{__("Remove")}&nbsp;&nbsp;
-						else
-							i.icon.comment
-							| &nbsp;#{article.comments.length}
-							| #{__("comments")}&nbsp;&nbsp;
-							i.icon.share
-							| &nbsp;#{req.user.meta.shares}
-							| #{__("shares")}&nbsp;&nbsp;
-							i.icon.thumbs-up
-							| &nbsp;#{req.user.meta.likes}
-							| #{__("likes")}&nbsp;&nbsp;
+		if(articles.length > 0)
+			each article in articles
+				li
+					span.action
+						i.icon.eye-open
+						i.icon.chevron-right
+					article
+						h2
+							a.title(href='/articles/'+article._id, title=article.title, target="_blank") #{article.title}
+						p
+							i.icon.time
+							| &nbsp;#{__d(article.createdAt)}&nbsp;&nbsp;
+							if(!article.published)
+								a(href='/articles/'+article._id+'/edit',title=__("Edit"))
+									i.icon.edit
+									| &nbsp;#{__("Edit article")}&nbsp;&nbsp;
+								span.link.remove(rel=article._id,title=__("Remove"))
+									i.icon.remove-sign
+									| &nbsp;#{__("Remove")}&nbsp;&nbsp;
+							else
+								i.icon.comment
+								| &nbsp;#{article.comments.length}
+								| #{__("comments")}&nbsp;&nbsp;
+								i.icon.share
+								| &nbsp;#{req.user.meta.shares}
+								| #{__("shares")}&nbsp;&nbsp;
+								i.icon.thumbs-up
+								| &nbsp;#{req.user.meta.likes}
+								| #{__("likes")}&nbsp;&nbsp;
 
-						if (article.tags)
-							i.icon.tags
-							| &nbsp;#{__('Tags')}&nbsp;
-							each tag in article.tags.split(',')
-								a(href="/tags/"+tag)= tag
-				if(article.published)
-					p.published
-						em #{__("Published")}&nbsp;&nbsp;
-						i.icon.check
-				else
-					span.button.purple(rel=article._id,title=__("Publish")) #{__("Publish")}
+							if (article.tags)
+								i.icon.tags
+								| &nbsp;#{__('Tags')}&nbsp;
+								each tag in article.tags.split(',')
+									a(href="/tags/"+tag)= tag
+					if(article.published)
+						p.published
+							em #{__("Published")}&nbsp;&nbsp;
+							i.icon.check
+					else
+						span.button.purple(rel=article._id,title=__("Publish")) #{__("Publish")}
+		else
+			li
+				p.no-entries #{__("No articles written")}
 
 
 block right-content

@@ -1,51 +1,36 @@
 extends ../layouts/default
 
+block styles
+	link(rel='stylesheet', href='/css/libs/jwysiwyg/jquery.wysiwyg.css')
 block scripts
-  script(src='/js/libs/wyzz/wyzz.js',type="application/javascript")
-  script(src='/js/articles/form.js',type="application/javascript")
+	script(src='/js/libs/jwysiwyg/jquery.wysiwyg.js',type="application/javascript")
+	script(src='/js/libs/jwysiwyg/controls/wysiwyg.image.js',type="application/javascript")
+	script(src='/js/libs/jwysiwyg/controls/wysiwyg.link.js',type="application/javascript")
+	script(src='/js/libs/jwysiwyg/controls/wysiwyg.table.js',type="application/javascript")
+	script(src='/js/articles/form.js',type="application/javascript")
 
 block left-content
-  - var action = '/articles/add'
-  if (!article.isNew)
-    - action = '/articles/'+article.id
+	- var action = '/articles/add'
+	if (!article.isNew)
+		- action = '/articles/'+article.id
 
-  if (typeof errors !== 'undefined')
-    .fade.in.alert.alert-block.alert-error
-      a.close(data-dismiss="alert", href="javascript:void(0)") x
-      ul
-        each error in errors
-          li= error.type
+	if (typeof errors !== 'undefined')
+			ul
+				each error in errors
+					li= error.type
 
-  .row
-    .span7
-      form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
-        if (!article.isNew)
-          input(type="hidden", name="_method", value="PUT")
+	form(method="post", action=action, enctype="multipart/form-data")
+		if (!article.isNew)
+			input(type="hidden", name="_method", value="PUT")
 
-        .control-group
-          label.control-label(for='title') #{__('Title')}
-          .controls
-            input#title.input-xlarge(type='text', name="title", value=article.title, placeholder="#{__('Enter the title')}")
+		fieldset#hidden
+			input#images(type='file', name="image[]")
+			input#title(type='text', name="title", value=article.title, placeholder="#{__('Enter the title')}")
+			input#tags(type='text', name="tags", value=article.tags, placeholder="#{__('Enter the tags')}")
+		textarea#desc(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
 
-        .control-group
-          label.control-label(for='title') #{__('Image')}
-          .controls
-            input(type='file', name="image[]")
-
-        .control-group
-          label.control-label(for='desc') #{__('Body')}
-          .controls
-            textarea#desc.tinymce.input-xlarge(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
-
-        .control-group
-          label.control-label(for='desc') #{__('Tags')}
-          .controls
-            input#tags(type='text', name="tags", value=article.tags, placeholder="#{__('Enter the tags')}")
-
-        .form-actions
-          button.btn.btn-primary(type='submit') #{__('Save changes')}
-          &nbsp;
-          a.btn(href='/articles', title="cancel") #{__('Cancel')}
-    .span5
-      if (!article.isNew && article.image && article.image.files && article.image.files.length)
-        img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
+		fieldset#action
+			button.purple(type='submit') #{__('Publish')}
+		//.span5
+		//	if (!article.isNew && article.image && article.image.files && article.image.files.length)
+		//		img(src=article.image.cdnUri + '/mini_' + article.image.files[0])

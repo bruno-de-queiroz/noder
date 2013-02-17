@@ -84,5 +84,7 @@
 	"Enter the feed url": "Enter the feed url",
 	"View Feed": "View Feed",
 	"Feeds": "Feeds",
-	"Edit Feed": "Edit Feed"
+	"Edit Feed": "Edit Feed",
+	"Add article": "Add article",
+	"No articles written": "No articles written"
 }

@@ -1,0 +1,167 @@
+main-color = #8a25cd
+light-grey-color = #f1f1f1
+main-grey-color = #555
+background-color = #e9e9e9
+side-font-color = #1d1d1d
+green-color = #4adb76
+red-color = #e7635e
+facebook-color = #3a5a93
+twitter-color = #18aacf
+google-color = #1f1f1f
+marvel = 'Marvel', sans-serif
+opensans = 'Open Sans', sans-serif
+ostrich = 'ostrich_sans_roundedmedium', sans-serif
+iconfont = 'FontAwesome', "Open Sans", sans-serif
+
+div.wysiwyg
+	border-radius 5px
+	font-family opensans
+	font-size 16px
+	background light-grey-color
+	color main-grey-color
+	box-shadow inset 0 2px 0px darken(light-grey-color,10)
+	border none
+	padding 0px
+	letter-spacing -1px
+	transition all .2s
+	&:focus
+		background white
+		outline none
+		transition all .2s
+	*
+		margin 0
+		padding 0
+	ul.toolbar
+		list-style none
+		float left
+		padding 0px 5px
+		margin 0
+		li
+			cursor pointer
+			display inline-block
+			padding 0 3px
+			text-align center
+			line-height 20px
+			vertical-align middle
+			color darken(background-color,15)
+			font-size 14px
+			margin 2px 0 0 0
+			line-height 25px
+			span
+				display none
+			&.separator
+				background: none
+				width 1px
+				height 28px
+				margin 0px 0 0 8px 
+				border none
+				border-left 1px solid darken(background-color,2)
+			&.disabled
+				cursor default
+				background-color transparent
+				opacity 0.5
+			&.wysiwyg-button-hover, &.active
+				background-color: transparent
+				color main-grey-color
+			&.jwysiwyg-custom-command
+				overflow hidden
+
+	div.toolbar-wrap
+		width 100%
+		border-bottom 1px solid darken(background-color,2)
+	iframe
+		clear left
+		background-color none
+		padding 0px
+		margin 0
+		display block
+		width 100%
+		color main-grey-color
+	textarea
+		border 0
+		outline none
+		box-shadow none
+
+div.wysiwyg-dialogRow
+	float left
+	width 100%
+	font-size 16px
+
+/* dialog */
+.wysiwyg-dialog
+	position fixed
+	top 50px
+	left 50px
+	width 450px
+	height 300px
+	background transparent
+	font 14px "Helvetic Neue", Helvetica,Arial,sans-serif
+	.wysiwyg-dialog-topbar
+		background #333
+		border 1px #111 solid
+		color white
+		padding 10px
+		position relative
+		.wysiwyg-dialog-close-wrapper
+			.wysiwyg-dialog-close-button
+				color white
+				text-decoration none
+				display block
+				padding 6px 10px
+				position absolute
+				right 12px
+				top 50%
+				height 14px
+				margin-top -12px
+		.wysiwyg-dialog-close-wrapper
+			a.wysiwyg-dialog-close-button:hover
+				background #666
+		.wysiwyg-dialog-title
+			font-size 20px
+			font-weight bold
+			padding 5px
+	.wysiwyg-dialog-content
+		border 1px #ccc solid
+		border-top 0
+		padding 15px
+		background white
+
+.wysiwyg-dialog-modal-div
+	position absolute
+	top 0px
+	left 0px
+	width 100%
+	height 100%
+
+.wysiwyg-dialog-content
+	form.wysiwyg
+		fieldset
+			border 1px #ccc solid
+		legend
+			padding 7px
+		.form-row
+			clear both
+			padding 4px 0
+			label, .form-row-key
+				display block
+				float left
+				width 35%
+				text-align right
+				padding 4px 5px
+			.form-row-value
+				display block
+				float left
+				width 55%
+		input, select
+			padding:2px
+			width:100%
+			margin:2px
+			&.width-auto
+				width auto
+			&.width-small
+				width 50px
+				min-width 50px
+				max-width 50px
+		input[type=submit], input[type=reset]
+			padding 2px 7px
+			width auto

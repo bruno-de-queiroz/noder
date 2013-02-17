@@ -63,7 +63,6 @@ var UserController = function(app,passport,auth){
 				, imager = new Imager(imagerConfig, 'S3');
 
 				user.provider = 'local';
-				console.log(req.files);
 				imager.upload(req.files.picture, function (err, cdnUri, files) {
 					if (err)
 						return res.render('400')
@@ -71,6 +70,7 @@ var UserController = function(app,passport,auth){
 					if (files.length)
 						user.picture = { cdnUri : cdnUri, files : files }
 
+					console.log("Saving User");
 					user.save(function(err){
 						if (err) {
 							res.render('/signup', {
