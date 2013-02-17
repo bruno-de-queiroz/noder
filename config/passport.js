@@ -59,7 +59,7 @@ module.exports = function (passport, config) {
 				}
 				else {
 					user.providers.push("twitter");
-					user.twitter: profile._json
+					user.twitter = profile._json
 				}
 				user.save(function (err) {
 					if (err) console.log(err)
@@ -89,7 +89,7 @@ module.exports = function (passport, config) {
 				}
 				else {
 					user.providers.push("facebook");
-					user.twitter: profile._json
+					user.twitter = profile._json
 				}
 				user.save(function (err) {
 					if (err) console.log(err)
@@ -107,11 +107,11 @@ module.exports = function (passport, config) {
 		},
 		function(accessToken, refreshToken, profile, done) {
 			User.findOne({ '_id': profile.id }, function (err, user) {
+				var new_profile = {}
+				new_profile.id = profile.id
+				new_profile.displayName = profile.displayName
+				new_profile.emails = profile.emails
 				if (!user) {
-					var new_profile = {}
-					new_profile.id = profile.id
-					new_profile.displayName = profile.displayName
-					new_profile.emails = profile.emails
 					console.log(profile);
 					user = new User({
 						name: profile.displayName
@@ -122,7 +122,7 @@ module.exports = function (passport, config) {
 					})
 				} else {
 					user.providers.push("google");
-					user.twitter: profile._json
+					user.twitter = new_profile._json
 				}
 				user.save(function (err) {
 					if (err) console.log(err)
