@@ -60,5 +60,7 @@
 	"Inspirations": "Inspirations",
 	"Add Feed": "Add Feed",
 	"Feed url": "Feed url",
-	"No feed found": "No feed found"
+	"No feed found": "No feed found",
+	"Loading feeds": "Loading feeds",
+	"Ready for work": "Ready for work"
 }
