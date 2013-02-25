@@ -10,7 +10,7 @@ var UserController = function(app,passport,auth){
 		}
 		, authCallback: {
 			render : function (req, res, next) {
-				res.redirect('/signup');
+				res.redirect('/users/'+req.user.id);
 			}
 		}
 		, login : {
@@ -105,7 +105,7 @@ var UserController = function(app,passport,auth){
 	}).virtual([
 		{
 			mapping : '/auth/facebook'
-			, filters : [ passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/login' }) ]
+			, filters : [ passport.authenticate('facebook', { scope: [ 'user_likes' ,'friends_likes', 'publish_stream' , 'email', 'user_about_me'], failureRedirect: '/login' }) ]
 			, action : 'signin'
 		}
 		, {
@@ -125,12 +125,12 @@ var UserController = function(app,passport,auth){
 		}
 		, {
 			mapping : '/auth/google'
-			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
+			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.googleapis.com/oauth2/v1/userinfo' }) ]
 			, action : 'signin'
 		}
 		, {
 			mapping : '/auth/google/callback'
-			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
+			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.googleapis.com/oauth2/v1/userinfo' }) ]
 			, action : 'authCallback'
 		}
 	]).apply({

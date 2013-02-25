@@ -5,8 +5,8 @@ block mid-content
 		fieldset#account-info
 			h1 #{__('Account info')}
 			figure#userpicture
-				if( user.picture.files.thumb )
-					img(src=user.picture.files.thumb)
+				if( user.picture.medium )
+					img(src=user.picture.medium, width=92, height=92)
 				else
 					i.icon.plus-sign.add-image
 			input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username, readonly="true")
@@ -15,15 +15,16 @@ block mid-content
 		fieldset#bind-to
 			h1 #{__("Bind to")}
 			each provider in providers
-				if(user.hasOwnProperty(provider))
+				-console.log(user[provider])
+				if(user[provider])
 					span.disabled(class=provider)
 						i.icon(class=provider+"-sign")
-						| user.name
+						| #{user[provider].email || user[provider].screen_name }
 				else
 					a(href="/auth/"+provider,class=provider)
 						i.icon(class=provider+"-sign")
 						| #{__("add a "+provider+" account")}
-			input#autopublish(type="checkbox",name="autopublishtoall",value="true",checked="true")
+			input#autopublish(type="checkbox",name="autopublishtoall",value="true",checked=user.publishToAll)
 			label(for="autopublish") #{__('Auto publish articles in all accounts')}
 		fieldset#action
 			button.button.green(type='submit') #{__('Save')}

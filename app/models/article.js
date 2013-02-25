@@ -23,15 +23,18 @@ var ArticleSchema = new Schema({
 	}
 	, categories: []
 	, facebook : {
-		shares : []
+		posts: []
+		, shares : []
 		, likes : []
 	}
 	, twitter : {
-		retweets : []
+		posts: []
+		, retweets : []
 		, followers : []
 	}
 	, google : {
-		plus : []
+		posts: []
+		, plus : []
 		, shares : []
 	}
 	, published : {type : Boolean, default : false}

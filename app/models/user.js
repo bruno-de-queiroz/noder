@@ -11,7 +11,8 @@ var UserSchema = new Schema(
 		name: String
 		, email: String
 		, username: String
-		, providers: [{ type: String }]
+		, provider: String
+		, providers: [{ type:String }]
 		, hashed_password: String
 		, salt: String
 		, facebook: {}
@@ -19,14 +20,16 @@ var UserSchema = new Schema(
 		, google: {}
 		, feeds: []
 		, picture : {
-				cdnUri: String
-				, files: []
+				small: String,
+				medium: String,
+				large: String
 		}
 		, blog : {
 			title: {type : String, default : 'noder-blog'}
 			, description : {type : String, default : 'another noder blog'}
 		}
 		, articles : [{ type: Schema.ObjectId, ref : 'Article' }]
+		, publishToAll: [{ type: Boolean, default: true }]
 	});
 
 // virtual attributes

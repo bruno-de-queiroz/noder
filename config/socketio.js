@@ -6,8 +6,6 @@ module.exports = function(app,port){
 		, rss = require('rssparser')
 		, async = require('async')
 		, _token = null
-		, _feeds = {}
-		, _errors = []
 		, socket = null
 		, Feed = mongoose.model("Feed")
 		, generateToken = function(){
@@ -29,30 +27,8 @@ module.exports = function(app,port){
 				console.log("Going to DB");
 				Feed.findOne({ _id : { $in : data.feeds }}).populate("feeds").exec(function(err,feeds)
 				{
-					console.log("Iterate over feeds");
-
-					var populateFeeds = function (feed, cb) {
-						if(!_feeds[feed.title]) _feeds[feed.title] = {};
-
-						rss.parseURL(feed.url, {}, function(err, result){
-
-							_feeds[feed.title].article = result ;
-
-							cb(null,_feeds);
-
-						});
-					}
-
-					if (typeof feeds == "array" && feeds.length) {
-						async.map(feeds, populateFeeds, function (err, results) {
-							if(err)	_errors.push(err);
-						})
-					} else if(typeof feeds == "object"){
-						console.log("Publishing to mediator");
-						populateFeeds(feeds,function(err,articles){
-							if(err)	_errors.push(err);
-						})
-					}
+					if(err) mediator.publish("error", { channel:"feeds", subchannel: "errors", data : { message: "Error while populating feeds"}});
+					mediator.publish("send", { channel:"feeds", subchannel: "update", data : feeds});
 				})
 				break;
 			case "fetch":
@@ -77,10 +53,6 @@ module.exports = function(app,port){
 				console.log("NOT VALID TOKEN");
 			}
 		});
-
-		mediator.publish("send",{ channel:"feeds", subchannel: "update", data : _feeds });
-		if(_errors.length>0)
-			mediator.publish("send",{ channel:"socket", subchannel: "errors", data : _errors });
 	});
 
 	server.listen(port);

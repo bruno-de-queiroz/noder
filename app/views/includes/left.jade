@@ -3,8 +3,8 @@ header#left-header
 	if(req.user)
 		section#user-info
 			figure.picture
-				if(req.user.picture.files.mini)
-					img(src=req.user.picture.files.mini)
+				if(req.user.picture.small)
+					img(src=req.user.picture.small, width=50, height=50)
 				else
 					i.icon.plus.add-image
 			div.info
