@@ -19,7 +19,7 @@ block mid-content
 				if(user[provider])
 					span.disabled(class=provider)
 						i.icon(class=provider+"-sign")
-						| #{user[provider].email || user[provider].screen_name }
+						| #{user[provider].email || user[provider].screen_name || user[provider].displayName }
 				else
 					a(href="/auth/"+provider,class=provider)
 						i.icon(class=provider+"-sign")
