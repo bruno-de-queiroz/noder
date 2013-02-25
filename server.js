@@ -2,10 +2,11 @@
  * Configuration loading and booting of controllers and custom error handlers */
 GLOBAL.moo = require('./lib/mootools/mootools')
 GLOBAL.mongoose = require('mongoose')
+GLOBAL.mediator = require("./lib/mediator")
 
 var express = require('express')
   , fs = require('fs')
-  , passport = require('passport')
+  , passport = require('passport');
 
 
 // Load configurations
@@ -39,8 +40,10 @@ fs.readdirSync(controllers_path).forEach(function (file) {
 
 
 // Start the app by listening on <port>
-var port = process.env.PORT || 3000
-app.listen(port)
+var port = process.env.PORT || 3000,
+	socketPort = 3444;
+
+var io = require('./config/socketio')(app,port);
 
 
 //console.log(app.routes)

@@ -6,6 +6,10 @@
 	"author": "Bruno de Queiroz <creativelikeadog@gmail.com>",
 	"dependencies": {
 		"express":"3.1.0",
+		"socket.io":"latest",
+		"socket.io-client":"latest",
+		"nubnub":"latest",
+		"rssparser":"latest",
 		"connect-mongo": "0.3.2",
 		"connect-flash": "0.1.0",
 		"mongoose": "3.5.6",

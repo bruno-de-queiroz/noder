@@ -3,34 +3,24 @@ var ArticleController = function(app,passport,auth){
 	var controller = require("../abstracts/controller")
 	, _ = require('lodash')
 	, async = require('async')
+	, rss = require('feedparser')
+	, inspect = require('util').inspect
 	, Articles = new controller("articles",app,passport,auth)
-	, getFeeds = function(feeds,callback){
-		var Feed = mongoose.model("Feed")
-			, feedsList = {}
-
-		Feed.find({ _id : { $in : feeds } },function(err,feeds) {
-			if(err) callback.call(this,err,null)
-			callback.call(this,null,feeds)
-		});
-	}
-
 
 	Articles.import([ 'imager' ]).extend({
 		add : {
 			filters : [ auth.requiresLogin ]
 			, render : function(req, res){
-				var Article = Articles.model('Article'),
-					userFeeds = req.user.feeds;
+				var Article = Articles.model('Article');
 
-				getFeeds(userFeeds,function(err,feeds){
-					if(err) throw new Error(app.locals.__('Error while fetching feeds'))
-					res.render( Articles.name() + '/add', {
-						title: app.locals.__('New Article')
-						, pageName: Articles.name() + "-add"
-						, article: new Article({})
-						, feeds : feeds
-					})
-				});
+				console.log("Fetching feeds async");
+				mediator.publish("feeds",{ action : "fetch" , feeds: req.user.feeds });
+
+				res.render( Articles.name() + '/add', {
+					title: app.locals.__('New Article')
+					, pageName: Articles.name() + "-add"
+					, article: new Article({})
+				})
 			}
 		}
 		, create : {

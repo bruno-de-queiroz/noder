@@ -1,13 +1,8 @@
 extends ../layouts/default
 
-block styles
-	link(rel='stylesheet', href='/css/libs/jwysiwyg/jquery.wysiwyg.css')
 block scripts
-	script(src='/js/libs/jwysiwyg/jquery.wysiwyg.js',type="application/javascript")
-	script(src='/js/libs/jwysiwyg/controls/wysiwyg.image.js',type="application/javascript")
-	script(src='/js/libs/jwysiwyg/controls/wysiwyg.link.js',type="application/javascript")
-	script(src='/js/libs/jwysiwyg/controls/wysiwyg.table.js',type="application/javascript")
-	script(src='/js/articles/form.js',type="application/javascript")
+	script(src='/js/modules/feeds.js')
+	script(src='/js/views/articles/form.js')
 
 block left-content
 	- var action = '/articles/add'

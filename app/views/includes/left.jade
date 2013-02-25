@@ -1,7 +1,6 @@
 header#left-header
 	h1#logo Noder
 	if(req.user)
-		- console.log(req.user)
 		section#user-info
 			figure.picture
 				if(req.user.picture.files.mini)
