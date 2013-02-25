@@ -125,12 +125,12 @@ var UserController = function(app,passport,auth){
 		}
 		, {
 			mapping : '/auth/google'
-			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.googleapis.com/oauth2/v1/userinfo' }) ]
+			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'signin'
 		}
 		, {
 			mapping : '/auth/google/callback'
-			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.googleapis.com/oauth2/v1/userinfo' }) ]
+			, filters : [ passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }) ]
 			, action : 'authCallback'
 		}
 	]).apply({
