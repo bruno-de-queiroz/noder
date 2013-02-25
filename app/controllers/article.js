@@ -3,7 +3,6 @@ var ArticleController = function(app,passport,auth){
 	var controller = require("../abstracts/controller")
 	, _ = require('lodash')
 	, async = require('async')
-	, rss = require('feedparser')
 	, inspect = require('util').inspect
 	, Articles = new controller("articles",app,passport,auth)
 
