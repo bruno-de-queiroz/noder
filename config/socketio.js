@@ -1,59 +1,61 @@
-module.exports = function(app,port){
+module.exports = function(app,config,port){
 	var server = require('http').Server(app)
 		, io = require("socket.io").listen(server)
+		, passio = require("passport.socketio")
 		, i18n = require("i18n")
-		, nub = require('nubnub')
-		, rss = require('rssparser')
-		, async = require('async')
-		, _token = null
+		, _instances = {}
 		, socket = null
-		, Feed = mongoose.model("Feed")
-		, generateToken = function(){
+		, generateToken = function(token){
 			var newToken = Math.round((new Date().valueOf() * Math.random()));
-			return newToken == _token ? generateToken() : newToken ;
+			return newToken == token ? generateToken() : newToken ;
 		}
 
-
-	mediator.subscribe("send",function(data){
-		console.log("Emiting to view");
-		if(socket){
-			socket.emit("event",data);
+	io.set("authorization", passio.authorize({
+		key: config.key					//the cookie where express (or connect) stores its session id.
+		, secret: config.secret				//the session secret to parse the cookie
+		, store: config.sessionStorage	//the session store that express uses
+		, fail: function(data, accept) {
+			console.log()
+			accept(i18n.__('Not authorized.'), false);
 		}
-	})
-
-	mediator.subscribe("feeds",function(data){
-		switch(data.action){
-			case "fetch":
-				console.log("Going to DB");
-				Feed.findOne({ _id : { $in : data.feeds }}).populate("feeds").exec(function(err,feeds)
-				{
-					if(err) mediator.publish("error", { channel:"feeds", subchannel: "errors", data : { message: "Error while populating feeds"}});
-					mediator.publish("send", { channel:"feeds", subchannel: "update", data : feeds});
-				})
-				break;
-			case "fetch":
-
-				break;
+		, success: function(data, accept) {
+			accept(null, true);
 		}
-
-	});
+	}));
 
 	io.on('connection', function(s){
 		socket = s;
-		_token = Math.round((new Date().valueOf() * Math.random()));
+		var token = Math.round((new Date().valueOf() * Math.random()));
 
-		socket.emit('csrf', _token);
+		_instances[s.id] = {
+			user: socket.handshake.user.id
+			, token: token
+			, socket: s.id
+		}
+
+		socket.emit('csrf', token);
 
 		socket.on('event', function (request) {
-			if(request.token == _token){
-				mediator.publish(request.channel, request.action);
-				_token = generateToken();
-				socket.emit('csrf', _token);
+
+			var token = _instances[s.id].token;
+
+			if(request.token == token){
+
+				mediator.publish(request.channel, _instances[s.id], request.action, request.data ? request.data : null );
+
+				token = generateToken(token);
+
+				_instances[s.id].token = token;
+
+				socket.emit('csrf', token);
+
 			} else {
-				console.log("NOT VALID TOKEN");
+				console.log(i18n.__("Not valid token."));
 			}
 		});
 	});
 
 	server.listen(port);
+
+	return io;
 }

@@ -1,19 +1,15 @@
-/* Main application entry file. Please note, the order of loading is important.
- * Configuration loading and booting of controllers and custom error handlers */
 GLOBAL.moo = require('./lib/mootools/mootools')
 GLOBAL.mongoose = require('mongoose')
 GLOBAL.mediator = require("./lib/mediator")
 
 var express = require('express')
-  , fs = require('fs')
-  , passport = require('passport');
-
-
-// Load configurations
-var env = process.env.NODE_ENV || 'development'
-  , config = require('./config/config')[env]
-  , auth = require('./config/middlewares/authorization')
-  , mongoose = require('mongoose')
+	, fs = require('fs')
+	, passport = require('passport')
+	// loading config
+	, env = process.env.NODE_ENV || 'development' 
+	, config = require('./config/config')[env]
+	, auth = require('./config/middlewares/authorization')
+	, mongoose = require('mongoose')
 
 // Bootstrap db connection
 mongoose.connect(config.db)
@@ -21,7 +17,7 @@ mongoose.connect(config.db)
 // Bootstrap models
 var models_path = __dirname + '/app/models'
 fs.readdirSync(models_path).forEach(function (file) {
-  require(models_path+'/'+file)
+	require(models_path+'/'+file)
 })
 
 // bootstrap passport config
@@ -35,17 +31,15 @@ require('./config/express')(app, config, passport)
 // Bootstrap routes
 var controllers_path = __dirname + '/app/controllers';
 fs.readdirSync(controllers_path).forEach(function (file) {
-  require(controllers_path+'/'+file)(app, passport, auth)
+	require(controllers_path+'/'+file)(app, passport, auth)
 });
 
-
 // Start the app by listening on <port>
-var port = process.env.PORT || 3000,
-	socketPort = 3444;
+var port = process.env.PORT || 3000
+	, socketPort = 3444
+	, io = require('./config/socketio')(app,config,port)
+	, handler = require('./mediator')(io,config);
 
-var io = require('./config/socketio')(app,port);
 
-
-//console.log(app.routes)
 console.log('Express app started on port '+port)
 

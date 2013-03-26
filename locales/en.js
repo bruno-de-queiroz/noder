@@ -69,5 +69,8 @@
 	"add a facebook account": "add a facebook account",
 	"add a twitter account": "add a twitter account",
 	"add a google account": "add a google account",
-	"Auto publish articles in all accounts": "Auto publish articles in all accounts"
+	"Auto publish articles in all accounts": "Auto publish articles in all accounts",
+	"Bad response from hub: 400": "Bad response from hub: 400",
+	"Not authorized.": "Not authorized.",
+	"Not valid token.": "Not valid token."
 }

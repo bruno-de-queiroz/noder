@@ -2,16 +2,19 @@
  * Module dependencies.
  */
 
-var express = require('express')
-	, mongoStore = require('connect-mongo')(express)
-	, flash = require('connect-flash')
-	, stylus = require("stylus")
-	, i18n = require("i18n")
-	, moment = require("moment")
-	, nib = require("nib")
-	, viewHelpers = require('./middlewares/view');
-
 module.exports = function (app, config, passport) {
+
+	var express = require('express')
+		, mongoStore = require('connect-mongo')(express)
+		, sessionStorage = new mongoStore({	url: config.db,	collection : 'sessions' })
+		, flash = require('connect-flash')
+		, stylus = require("stylus")
+		, i18n = require("i18n")
+		, moment = require("moment")
+		, nib = require("nib")
+		, viewHelpers = require('./middlewares/view');
+
+	config.sessionStorage = sessionStorage;
 
 	i18n.configure({
 		locales: config.locales
@@ -62,13 +65,11 @@ module.exports = function (app, config, passport) {
 
 		// express/mongo session storage
 		app.use(express.session({
-			secret: 'noderblogger',
+			secret: config.secret,
 			maxAge  : new Date(Date.now() + 600000), //10 min
     		expires : new Date(Date.now() + 600000), //10 min
-			store: new mongoStore({
-				url: config.db,
-				collection : 'sessions'
-			})
+			store: config.sessionStorage,
+			key: config.key
 		}))
 
 		// connect flash for flash messages

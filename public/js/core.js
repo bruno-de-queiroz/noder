@@ -4,15 +4,25 @@ Application.Library = function() {
 	"use strict";
 	var dom = {};
 		dom.query = jQuery;
-	return {
-		getClass: function(obj){
+
+	var	_getClass = function(obj){
 			if (typeof obj === "undefined")
 				return "undefined";
 			if (obj === null)
 				return "null";
 				return Object.prototype.toString.call(obj).match(/^\[object\s(.*)\]$/)[1];
-		},
-		new: function(id,type,attr,html){
+		}
+		, _find = function(parent,object){
+			var query = dom.query(parent).find(object);
+			if(query.length == 1)
+				return _treatReturn(query[0]);
+			else if (query.length > 1) {
+				return _treatMutiples(query);
+			}
+			else
+				return false;
+		}
+		, _new = function(id,type,attr,html){
 			var obj = dom.query("<"+type+"></"+type+">");
 			obj.attr("id",id);
 			if(attr)
@@ -20,39 +30,102 @@ Application.Library = function() {
 			if(html)
 				obj.html(html);
 
-			return obj[0];
-		},
-		merge : function(a,b)
-		{
+			return _treatReturn(obj[0]);
+		}
+		, _merge = function(a,b){
 			return dom.query.extend({},a,b);
-		},
-		attr: function(el,attr,value){
+		}
+		, _attr = function(el,attr,value){
+			var result;
 			if(value){
 				dom.query(el).attr(attr,value);
+				result = _treatReturn(dom.query(el)[0]);
 			} else {
 				if(typeof attr != "object" ) throw new Error("Invalid arguments");
-				dom.query(el).attr(attr);
+				result = dom.query(el).attr(attr);
 			}
-		},
-		remove: function(selector){
-			dom.query(selector).remove();
-		},
-		append: function(a,b) {
-			dom.query(a).append(b);
-		},
-		get: function(selector) {
-			return dom.query(selector);
-		},
-		html: function(selector,html){
-			dom.query(selector).html(html);
-		},
-		bind: function(selector,event,callback){
-			this.unbind(selector,event);
-			dom.query(selector).bind(event,callback);
-		},
-		unbind: function(selector,event){
-			dom.query(selector).unbind(event);
+			return result;
 		}
+		, _remove = function(selector){
+			dom.query(selector).remove();
+		}
+		, _animate = function(type,obj,callback,time){
+			var obj = dom.query(obj);
+			obj[type](time ? time : "fast",callback);
+			return _treatReturn(obj[0]);
+		}
+		, _append = function(a,b) {
+			dom.query(a).append(b);
+		}
+		, _get = function(selector) {
+			var query = dom.query(selector);
+			if(query.length > 0)
+				return _treatReturn(query[0]);
+			else
+				return false;
+		}
+		, _html = function(selector,html){
+			var query = dom.query(selector);
+			query.html(html);
+			return _treatReturn(query[0]);
+		}
+		, _bind = function(selector,event,callback){
+			dom.query(selector).on(event,callback);
+		}
+		, _unbind = function(selector,event){
+			dom.query(selector).off(event);
+		}
+		, _treatMutiples = function(array){
+			var objs = []
+			for(var i = 0, j= array.length; i<j; i++){
+				var obj = array[i];
+				objs.push(_treatReturn(obj));
+			}
+			return objs;
+		}
+		, _treatReturn = function(obj){
+
+			var wrapper = {
+				selector : obj
+				, find : function(query){
+					return _find.call(this,obj,query)
+				}
+				, attr : function(attr,value) {
+					return _attr.call(this,obj,attr,value);
+				}
+				, append : function(object){
+					return _append.call(this,obj,object);
+				}
+				, animate : function(type,time,callback){
+					return _animate.call(this,type,obj,callback,time);
+				}
+				, html : function(string){
+					return _html.call(this,obj,string);
+				}
+				, on : function(event,callback){
+					return _bind.call(this,obj,event,callback);
+				}
+				, off : function(event){
+					return _unbind.call(this,obj,event);
+				}
+			}
+
+			return wrapper;
+		}
+
+	return {
+		getClass: _getClass
+		, create: _new
+		, merge : _merge
+		, attr: _attr
+		, remove: _remove
+		, animate: _animate
+		, append: _append
+		, get: _get
+		, find : _find
+		, html: _html
+		, bind: _bind
+		, unbind: _unbind
 	};
 };
 
@@ -190,6 +263,8 @@ Application.Sandbox = function (){
 		},
 		attr: lib.attr,
 		get: lib.get,
+		find: lib.find,
+		animate: lib.animate,
 		html: lib.html,
 		bind: lib.bind,
 		unbind: lib.unbind,

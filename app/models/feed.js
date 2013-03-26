@@ -5,9 +5,12 @@ var mongoose = require('mongoose')
 
 var FeedSchema = new Schema({
 	title : { type: String, default : ''}
+	, hash : String
 	, url : String
-	, updateDate: { type:Date, default: new Date() }
-	, articles : {}
+	, subscribed : { type: Boolean, default: false }
+	, image : String
+	, description: String
+	, content : {}
 })
 
 mongoose.model('Feed', FeedSchema)

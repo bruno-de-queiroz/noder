@@ -12,9 +12,6 @@ var ArticleController = function(app,passport,auth){
 			, render : function(req, res){
 				var Article = Articles.model('Article');
 
-				console.log("Fetching feeds async");
-				mediator.publish("feeds",{ action : "fetch" , feeds: req.user.feeds });
-
 				res.render( Articles.name() + '/add', {
 					title: app.locals.__('New Article')
 					, pageName: Articles.name() + "-add"

@@ -13,8 +13,8 @@ Application.Socket = function(name,sandbox) {
 			context.publish("socket" , "status" , { ready : true });
 		}
 		, _send = function(data){
-			console.log(_token);
 			var data = sandbox.merge(data,{ token : _token });
+			console.log(data);
 			socket.emit("event", data);
 		}
 		, _bind = function(success,token) {
@@ -29,6 +29,7 @@ Application.Socket = function(name,sandbox) {
 				});
 
 				socket.on("event",function(response){
+					console.log(response);
 					context.publish(response.channel , response.subchannel , response.data);
 				});
 
