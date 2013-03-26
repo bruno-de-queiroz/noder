@@ -60,8 +60,8 @@ module.exports = function(io,config){
 		}
 		, getFeed = function(client,url){
 			Feed.findOne({ url: url },function(err,feed){
-				console.log(config.pushServer);
-				if(!feed)
+				if(!feed){
+					console.log("Subscribing to: "+ url + " at " + config.pushServer);
 					subscriber.subscribe(config.pushServer,url,{ leaseSeconds: 10 * 60 },
 						function(url){
 							saveSubscription(client,url);
@@ -79,26 +79,24 @@ module.exports = function(io,config){
 							);
 						}
 					);
-				else{
+				} else {
 					User.findOne({ _id : client.user },function(err,user) {
 						if(_.indexOf(user.feed, feed._id) == -1)
 							user.feeds.push(feed._id);
 							user.save(function(err){
-								if (err)
-									throw new Error(i18n.__('Error while saving user'))
-								else
-									mediator.publish("send", client.socket,{
-										channel:"feeds"
-										, subchannel: "subscribe"
-										, data : {
-											success: true
-											, feed : {
-												image: feed.image
-												, title : feed.title
-												, description: feed.description
-											}
+								if (err) throw new Error(i18n.__('Error while saving user'))
+								mediator.publish("send", client.socket,{
+									channel:"feeds"
+									, subchannel: "subscribe"
+									, data : {
+										success: true
+										, feed : {
+											image: feed.image
+											, title : feed.title
+											, description: feed.description
 										}
-									});
+									}
+								});
 							});
 					});
 				}
@@ -122,15 +120,17 @@ module.exports = function(io,config){
 	mediator.subscribe("feeds",function(client,action,data){
 		switch(action){
 			case "fetch":
-				console.log("Going to DB");
-				Feed.findOne({ _id : { $in : data }}).populate("feeds").exec(function(err,feeds)
-				{
-					if(err) mediator.publish("error", { channel:"feeds", subchannel: "errors", data : { message: "Error while populating feeds"}});
-					mediator.publish("send", client.socket, { channel:"feeds", subchannel: "update", data : feeds});
-				})
+				User.findOne({ _id : client.user },function(err,user) {
+					if(err) throw new Error(i18n.__('Error while finding user'))
+
+					Feed.findOne({ _id : { $in : user.feeds }}).populate("feeds").exec(function(err,feeds)
+					{
+						if(err) mediator.publish("error", { channel:"feeds", subchannel: "errors", data : { message: "Error while populating feeds"}});
+						mediator.publish("send", client.socket, { channel:"feeds", subchannel: "update", data : feeds ? feeds : {} });
+					})
+				});
 				break;
 			case "subscribe":
-				console.log("Subscribing to:" + data.url);
 				getFeed(client,data.url);
 				break;
 			case "update":

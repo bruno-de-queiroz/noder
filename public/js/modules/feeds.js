@@ -21,7 +21,7 @@ Application.Feeds = function(name,sandbox) {
 		, _start = function(data) {
 			if(data.ready){
 				console.log("Starting widget");
-				context.publish("socket", "event", { channel : "feeds" , action : "fetchLast" });
+				context.publish("socket", "event", { channel : "feeds" , action : "fetch" });
 				context.unsubscribe("socket","status");
 			}
 		}
