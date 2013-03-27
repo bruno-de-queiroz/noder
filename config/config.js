@@ -40,7 +40,7 @@ module.exports = {
 		root: require('path').normalize(__dirname + '/..'),
 		app: {
 			name: 'Noder - Social Blogger'
-			, baseURL: "social-noder.heroku.com"
+			, baseURL: "social-noder.herokuapp.com"
 			, pushServer: "http://pubsubhubbub.appspot.com"
 		},
 		db: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/noder',
