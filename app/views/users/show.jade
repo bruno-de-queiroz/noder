@@ -2,6 +2,7 @@ extends ../layouts/default
 
 block mid-content
 	form(action="/users/"+user.id, method="post")
+		input(type="hidden", name="_method", value="PUT")
 		fieldset#account-info
 			h1 #{__('Account info')}
 			figure#userpicture
@@ -10,6 +11,7 @@ block mid-content
 				else
 					i.icon.plus-sign.add-image
 			input#username(type='text', name="username", placeholder="#{__('Username')}", value=user.username, readonly="true")
+			input#username(type='password', name="password", placeholder="#{__('Password')}", value=user.password)
 			input#blogtitle(type='text',name="blog.title", placeholder="#{__('Blog title')}", value=user.blog.title)
 			textarea#blogdescription(name="blog.descripton",placeholder="#{__('Blog description')}")= user.blog.description
 		fieldset#bind-to

@@ -51,6 +51,29 @@ var UserController = function(app,passport,auth){
 				res.redirect('/articles');
 			}
 		}
+		, update : {
+			filters : [ auth.requiresLogin , auth.hasAuthorization ]
+			, render : function(req, res){
+				var user = Users.model('User');
+
+				user = _.extend(req.user, req.body);
+
+
+				user.save(function(err, doc) {
+					if (err) {
+						res.render( Users.name() + '/show', {
+							title: user.name
+							, user: user
+							, pageName: "user-setup"
+							, providers : [ 'facebook', 'twitter' , 'google' ]
+						})
+					}
+					else {
+						res.redirect('/articles')
+					}
+				})
+			}
+		}
 		, create : {
 			mapping : "/users/add"
 			, method : "post"

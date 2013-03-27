@@ -19,17 +19,16 @@ block left-content
 			input(type="hidden", name="_method", value="PUT")
 
 		fieldset#hidden
+			if (!article.isNew && article.image && article.image.files && article.image.files.length)
+				img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 			input#images(type='file', name="image[]")
 			input#title(type='text', name="title", value=article.title, placeholder="#{__('Enter the title')}")
-			input#tags(type='text', name="tags", value=article.tags, placeholder="#{__('Enter the tags')}")
+			textarea#tags(name="tags", placeholder="#{__('Enter the tags')}")= article.tags
 			button.green(type='button') #{__('Save')}
 		textarea#desc(type='text', rows="5", name="body", placeholder="#{__('Enter the article description')}")=article.body
 
 		fieldset#action
 			button.purple(type='submit') #{__('Publish')}
-		//.span5
-		//	if (!article.isNew && article.image && article.image.files && article.image.files.length)
-		//		img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 
 block right-header
 	h1 #{__('Inspirations')}

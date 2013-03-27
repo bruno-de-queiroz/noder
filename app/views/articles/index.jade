@@ -2,8 +2,10 @@ extends ../layouts/default
 
 block left-content
 	aside#search
-		input(type="text",name="search",placeholder=__("Anything to search"))
-		i.icon.search
+		form(method="post", action="/articles")
+			input(type="text",name="query",placeholder=__("Anything to search"), value=query)
+			button.search(type="submit")
+				i.icon.search
 	h1= __('Articles')
 		a(href="/articles/add", title=__("Add article"))
 			i.icon.plus-sign

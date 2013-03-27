@@ -242,9 +242,11 @@ section#signup
 		input
 			margin-bottom 18px
 			width 250px
+			&#blogtitle
+				width 360px
 		textarea
 			width 360px
-			height 120px
+			height 70px
 			resize none
 		button
 			position absolute
@@ -328,6 +330,12 @@ aside#search
 		vertical-align middle
 		padding 10px
 		margin 0
+	button
+		appearance none
+		border none
+		background none
+		border none
+		cursor pointer
 	i.icon
 		font-size 18px
 		color main-color
@@ -358,11 +366,12 @@ section#left-content
 			text-decoration none
 			vertical-align middle
 			padding 0 0 0 5px
+			color main-color
 			&:hover
 				color lighten(main-color,10)
 
 .articles-add-page section#left-content, .articles-edit-page section#left-content
-	textarea
+	textarea#desc
 		left 25px
 		right 25px
 		top 25px

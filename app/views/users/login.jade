@@ -6,7 +6,7 @@ block mid-content
 			h1 #{__('Login')}
 		form.login.form-horizontal(action="/users/session", method="post")
 
-			input#email(type='text', name="email", placeholder="#{__('User')}")
+			input#username(type='text', name="username", placeholder="#{__('User')}")
 			input#password(type='password', name="password", placeholder="#{__('Password')}")
 
 			if (typeof errors !== 'undefined')

@@ -140,7 +140,7 @@ var ArticleController = function(app,passport,auth){
 			, render : function(req, res){
 				var Article = Articles.model('Article')
 
-				, perPage = 5
+				, perPage = 10
 				, page = req.param('page') > 0 ? req.param('page') : 0
 
 				Article
@@ -155,6 +155,38 @@ var ArticleController = function(app,passport,auth){
 							res.render(Articles.name() + '/index', {
 								title: app.locals.__('List of Articles')
 								, articles: articles
+								, query : ""
+								, pageName: Articles.name() + "-index"
+								, page: page
+								, pages: count / perPage
+							})
+						})
+				})
+			}
+		}
+		, search: {
+			mapping : "/articles"
+			, method : "post"
+			, filters : [ auth.requiresLogin, auth.hasAuthorization ]
+			, render : function(req,res) {
+				var Article = Articles.model('Article')
+					, perPage = 10
+					, page = req.param("page") > 0 ? req.param("page") : 0;
+
+				console.log("Query: "+ req.param("query"));
+				Article
+					.find({ title: new RegExp( req.param("query") , "ig" )})
+					.populate('user', 'name')
+					.sort({'createdAt': -1}) // sort by date
+					.limit(perPage)
+					.skip(perPage * page)
+					.exec(function(err, articles) {
+						if (err) return res.render('500')
+						Article.count().exec(function (err, count) {
+							res.render(Articles.name() + '/index', {
+								title: app.locals.__('List of Articles')
+								, articles: articles
+								, query: req.param("query")
 								, pageName: Articles.name() + "-index"
 								, page: page
 								, pages: count / perPage

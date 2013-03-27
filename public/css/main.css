@@ -346,8 +346,9 @@ section#signup .button{display:block;width:auto;text-decoration:none}
 .user-setup-page section#mid-content fieldset#account-info figure{display:block;width:90px;height:90px;padding:0;margin:0;float:left;margin:0 17px 0 0;border:1px solid #ddd;background:#e9e9e9;text-align:center;line-height:110px;-webkit-transition:all .2s;-moz-transition:all .2s;-o-transition:all .2s;-ms-transition:all .2s;transition:all .2s;}
 .user-setup-page section#mid-content fieldset#account-info figure .add-image{cursor:pointer;font-size:38px;color:#8a25cd;}
 .user-setup-page section#mid-content fieldset#account-info figure .add-image:hover{color:#a247de;-webkit-transition:all .2s;-moz-transition:all .2s;-o-transition:all .2s;-ms-transition:all .2s;transition:all .2s}
-.user-setup-page section#mid-content fieldset#account-info input{margin-bottom:18px;width:250px}
-.user-setup-page section#mid-content fieldset#account-info textarea{width:360px;height:120px;resize:none}
+.user-setup-page section#mid-content fieldset#account-info input{margin-bottom:18px;width:250px;}
+.user-setup-page section#mid-content fieldset#account-info input#blogtitle{width:360px}
+.user-setup-page section#mid-content fieldset#account-info textarea{width:360px;height:70px;resize:none}
 .user-setup-page section#mid-content fieldset#account-info button{position:absolute;bottom:25px;left:50%;margin-left:-90px}
 .user-setup-page section#mid-content fieldset#account-info p.message{margin-top:10px}
 .user-setup-page section#mid-content fieldset#bind-to{width:250px;padding:25px;overflow:hidden;}
@@ -365,14 +366,15 @@ section#signup .button{display:block;width:auto;text-decoration:none}
 .user-setup-page section#mid-content fieldset#action:before{content:'';display:block;width:100%;height:30px;background:-o-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-o-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-o-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-o-linear-gradient(45deg,#e6e6e6 25%,transparent 25%);background:-moz-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-moz-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-moz-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-moz-linear-gradient(45deg,#e6e6e6 25%,transparent 25%);background:-webkit-linear-gradient(-45deg,transparent 25%,transparent 25%) -50px 0,-webkit-linear-gradient(-135deg,transparent 25%,transparent 25%) -50px 0,-webkit-linear-gradient(-225deg,#e6e6e6 25%,transparent 25%),-webkit-linear-gradient(45deg,#e6e6e6 25%,rgba(255,255,255,0) 25%);-webkit-background-size:18px 18px;-moz-background-size:18px 18px;background-size:18px 18px;background-color:transparent;position:absolute;top:-18px;left:0}
 aside#search{position:absolute;right:25px;top:25px;}
 aside#search input{font-size:13px;color:#9d9d9d;background:none;-webkit-border-radius:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none;width:120px;vertical-align:middle;padding:10px;margin:0}
+aside#search button{-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;background:none;border:none;cursor:pointer}
 aside#search i.icon{font-size:18px;color:#8a25cd;vertical-align:-2px}
 header#right-header aside#search{top:15px;right:15px}
 section#left-content{padding:25px 25px 10px 25px;overflow-x:hidden;overflow-y:hidden;position:absolute;top:80px;left:0;right:0;bottom:0;}
 section#left-content .mCSB_container aside#search{right:0;top:0}
 section#left-content h1{font-family:'ostrich_sans_roundedmedium',sans-serif;font-size:46px;color:#8a25cd;}
-section#left-content h1 a{font-size:18px;text-decoration:none;vertical-align:middle;padding:0 0 0 5px;}
+section#left-content h1 a{font-size:18px;text-decoration:none;vertical-align:middle;padding:0 0 0 5px;color:#8a25cd;}
 section#left-content h1 a:hover{color:#a247de}
-.articles-add-page section#left-content textarea,.articles-edit-page section#left-content textarea{left:25px;right:25px;top:25px;bottom:60px;position:absolute;visibility:hidden}
+.articles-add-page section#left-content textarea#desc,.articles-edit-page section#left-content textarea#desc{left:25px;right:25px;top:25px;bottom:60px;position:absolute;visibility:hidden}
 .articles-add-page section#left-content .wysiwyg,.articles-edit-page section#left-content .wysiwyg{position:absolute;top:25px;bottom:0;left:25px;right:25px;}
 .articles-add-page section#left-content .wysiwyg div.toolbar-wrap,.articles-edit-page section#left-content .wysiwyg div.toolbar-wrap{position:relative;z-index:100;background:#f1f1f1;border-top-left-radius:5px;border-top-right-radius:5px;-webkit-box-shadow:inset 0 2px 0 #d7d7d7;box-shadow:inset 0 2px 0 #d7d7d7}
 .articles-add-page section#left-content .wysiwyg iframe,.articles-edit-page section#left-content .wysiwyg iframe{position:absolute;left:0;top:30px;right:0;bottom:30px;z-index:90;height:95%}
