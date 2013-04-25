@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-module.exports = function (app, config, passport) {
+module.exports = function (app, subscriber, config, passport) {
 
 	var express = require('express')
 		, mongoStore = require('connect-mongo')(express)
@@ -38,6 +38,8 @@ module.exports = function (app, config, passport) {
 		src: config.root + '/public',
 		compile: function(str,path) { return stylus(str).set('filename',path).use(nib()).set('compress', true); }
 	}))
+
+	//app.use(subscriber.middleware())
 
 	app.use(express.static(config.root + '/public', { maxAge : config.staticMaxAge }))
 	app.use(express.logger('dev'))

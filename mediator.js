@@ -1,4 +1,4 @@
-module.exports = function(io,config){
+module.exports = function(io,subscriber,config){
 	var config = config.app
 		, _ = require('lodash')
 		, rss = require('rssparser')
@@ -6,7 +6,6 @@ module.exports = function(io,config){
 		, i18n = require("i18n")
 		, User = mongoose.model("User")
 		, Feed = mongoose.model("Feed")
-		, subscriber = require('snrub').createSubscriber({'host': config.baseURL })
 		, saveSubscription = function(client,url){
 			rss.parseURL(url, {}, function(err,response){
 				if(err)
@@ -61,13 +60,11 @@ module.exports = function(io,config){
 		, getFeed = function(client,url){
 			Feed.findOne({ url: url },function(err,feed){
 				if(!feed){
-					console.log("Subscribing to: "+ url + " at " + config.pushServer);
-					subscriber.subscribe(config.pushServer,url,{ leaseSeconds: 10 * 60 },
-						function(url){
-							saveSubscription(client,url);
-						},
-						function(status){
-							mediator.publish("send", client.socket,
+					console.log("Subscribing to: "+ url + " at superfeedr");
+					subscriber.subscribe(url,
+						function(err,feed){
+							if(err)
+								mediator.publish("send", client.socket,
 								{
 									channel:"feeds"
 									, subchannel: "subscribe"
@@ -75,8 +72,9 @@ module.exports = function(io,config){
 										success: false
 										, message: i18n.__("Bad response from hub: "+status)
 									}
-								}
-							);
+								});
+							else
+								saveSubscription(client,feed.url);
 						}
 					);
 				} else {
@@ -103,14 +101,14 @@ module.exports = function(io,config){
 			});
 		}
 
-	subscriber.on('subscribe', function(topic) {
-	  console.log("Subscribed to " + topic);
-	});
+	// subscriber.on('subscribe', function(topic) {
+	//   console.log("Subscribed to " + topic);
+	// });
 
-	subscriber.on('update', function(topic, content) {
-	  console.log("Content from " + topic);
-	  console.log(content);
-	});
+	// subscriber.on('update', function(topic, content) {
+	//   console.log("Content from " + topic);
+	//   console.log(content);
+	// });
 
 	mediator.subscribe("send",function(client,data){
 		console.log("Emiting to view");

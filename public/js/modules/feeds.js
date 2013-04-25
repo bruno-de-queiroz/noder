@@ -46,7 +46,8 @@ Application.Feeds = function(name,sandbox) {
 			toggleButton.on("click",_toggle);
 
 			input.on("change",function(){
-				context.publish("socket", "event", { channel : "feeds" , action : "subscribe", data: { url : this.value } });
+				if(this.value != "")
+					context.publish("socket", "event", { channel : "feeds" , action : "subscribe", data: { url : this.value } });
 			});
 
 		}

@@ -37,25 +37,5 @@
 			})
 		})
 	})
-
-	// $(".async.add-feed").bind("click",function(e){
-	// 	e.preventDefault();
-	// 	$("#add-feed")[$("#add-feed").is(".opened") ? "slideUp" : "slideDown"]('fast');
-	// 	$("#add-feed")[$("#add-feed").is(".opened") ? "removeClass" : "addClass"]('opened');
-	// });
-
-	// $("#add-feed").find("input").bind("change",function(){
-	// 	var standart = /^((ht|f)tp(s?)\:\/\/|~\/|\/)?(\w+:\w+@)?(([-\w]+\.)+(com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel|[a-z]{2}))(:[\d]{1,5})?(((\/([-\w~!$+|.,=]|%[a-f\d]{2})+)+|\/)+|\?|#)?((\?([-\w~!$+|.,*:]|%[a-f\d{2}])+=([-\w~!$+|.,*:=]|%[a-f\d]{2})*)(&([-\w~!$+|.,*:]|%[a-f\d{2}])+=([-\w~!$+|.,*:=]|%[a-f\d]{2})*)*)*(#([-\w~!$+|.,*:=]|%[a-f\d]{2})*)?$/ig;
-	// 	if((standart).test(this.value)){
-	// 		$.ajax({
-	// 			url: this.value,
-	// 			dataType: "xml",
-	// 			success: function(response){
-	// 				console.log(response);
-	// 			}
-	// 		})
-	// 	}
-
-	// })
 })(jQuery);
 

@@ -10,6 +10,8 @@
 		"socket.io-client":"latest",
 		"nubnub":"latest",
 		"snrub":"latest",
+		"superfeedr":"latest",
+		"node-stringprep":"latest",
 		"rssparser":"latest",
 		"connect-mongo": "0.3.2",
 		"connect-flash": "0.1.0",
